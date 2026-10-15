@@ -1,9 +1,9 @@
-# Recon Map: Hurda Adresi (hurdaadresi.com)
+# Recon Map: Bulgan Geri Dönüşüm (bulgangeridonusum.com.tr)
 
 **Scope:** Birebir site klonlama, tersine mühendislik (REA), hurda fiyatları, kurumsal hizmetler, bölgesel sayfalar ve modern web yeniden inşası.  
 **For:** Yeniden inşa (Replica & Re-engineering)  
 **Date:** 2026-10-15  
-**Yerel Klon Dizini:** `C:\AI-Tools\cloned-sites\hurdaadresi_com`
+**Yerel Klon Dizini:** `C:\AI-Tools\cloned-sites\bulgangeridonusum_com`
 
 ---
 
@@ -11,9 +11,9 @@
 
 | # | Kaynak | URL / Konum | Notlar |
 |---|---|---|---|
-| 1 | Orijinal Web Sitesi | `https://www.hurdaadresi.com/` | WordPress + LiteSpeed Cache + Cloudflare |
-| 2 | REST API Noktaları | `https://www.hurdaadresi.com/wp-json/wp/v2/pages` | 100+ ilçe ve fiyat sayfası keşfedildi |
-| 3 | Birebir Klon Deposu | `C:\AI-Tools\cloned-sites\hurdaadresi_com` | 1119 görsel, tüm CSS/JS/HTML dosyaları indirildi |
+| 1 | Orijinal Web Sitesi | `https://www.bulgangeridonusum.com.tr/` | WordPress + LiteSpeed Cache + Cloudflare |
+| 2 | REST API Noktaları | `https://www.bulgangeridonusum.com.tr/wp-json/wp/v2/pages` | 100+ ilçe ve fiyat sayfası keşfedildi |
+| 3 | Birebir Klon Deposu | `C:\AI-Tools\cloned-sites\bulgangeridonusum_com` | 1119 görsel, tüm CSS/JS/HTML dosyaları indirildi |
 | 4 | REA Statik Analizi | `rea analyze-javascript-application` | JS bundle'ları ve DOM ilişkileri ayrıştırıldı |
 | 5 | İletişim Kanalları | Tel: `0534 967 34 66` / WhatsApp: `905349673466` | Hızlı arama ve WhatsApp yönlendirmeleri |
 
