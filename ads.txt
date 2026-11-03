@@ -1,4 +1,4 @@
-# Bulgan Hurdacılık & Geri Dönüşüm (bulgangeridonusum.com.tr) - Authorized Digital Sellers (ads.txt)
-# Google AdSense / Google Ads Hesabı: mehmethilmiozkan@gmail.com
-# Yayıncı kimliğinizi (pub-XXXXXXXXXXXXXXXX) AdSense panelinizden aldığınızda aşağıdaki satır aktifleşir:
-google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+# Bulgan Hurdacılık (bulgangeridonusum.com.tr) - Authorized Digital Sellers (ads.txt)
+# Google AdSense Publisher: ca-pub-3325199916968482 (pub-3325199916968482)
+# Account: mehmethilmiozkan@gmail.com
+google.com, pub-3325199916968482, DIRECT, f08c47fec0942fa0

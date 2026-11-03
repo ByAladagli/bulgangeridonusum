@@ -385,6 +385,9 @@ def enhanced_wrap_html_document(slug, title, desc, body_html, json_ld_str, og_im
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/bulgan-theme.css?v=202611">
 
+  <!-- Google AdSense Auto Ads (ca-pub-3325199916968482) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3325199916968482" crossorigin="anonymous"></script>
+
   <script type="application/ld+json">{json_ld_str}</script>
 </head>
 <body>
