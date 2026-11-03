@@ -1,0 +1,27 @@
+{
+  "mcp_version": "1.0",
+  "name": "bulgan-hurdacilik-mardin",
+  "description": "Mardin ve Güneydoğu Anadolu canlı hurda fiyat sorgulama (-%20 net kantar) ve adresten mobil kantar çağrı servisi.",
+  "actions": [
+    {
+      "name": "get_live_scrap_prices",
+      "method": "GET",
+      "url": "https://bulgangeridonusum.com.tr/api/prices",
+      "description": "15 ana hurda kategorisi ve 75 alt kalemin güncel LME borsa referans ve -%20 net kantar alım fiyatlarını döndürür."
+    },
+    {
+      "name": "request_kantar_pickup",
+      "method": "POST",
+      "url": "https://bulgangeridonusum.com.tr/api/contact",
+      "content_type": "application/json",
+      "parameters": {
+        "name": "Müşteri veya Firma Adı (zorunlu)",
+        "phone": "Telefon Numarası (zorunlu, 10-11 hane)",
+        "city": "Mardin ilçesi veya Güneydoğu Anadolu ili",
+        "material": "Hurda cinsi (Bakır, Kablo, Demir, Alüminyum, Krom vb.)",
+        "weight": "Tahmini kilogram veya tonaj",
+        "note": "Adres ve saha detayı"
+      }
+    }
+  ]
+}

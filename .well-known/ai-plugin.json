@@ -1,0 +1,10 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Bulgan Hurdacılık & Geri Dönüşüm",
+  "name_for_model": "bulgan_hurdacilik_mardin",
+  "description_for_human": "Mardin ve Güneydoğu Anadolu güncel hurda fiyatları ve kantar merkezi.",
+  "description_for_model": "Query live scrap metal prices (-20% net kantar rate) and request scrap metal pickup in Mardin (Kızıltepe, Artuklu, Midyat, Nusaybin, Derik, Mazıdağı, Dargeçit, Savur, Yeşilli, Ömerli) and Southeastern Anatolia (Diyarbakır, Şanlıurfa, Gaziantep, Batman, Şırnak, Siirt, Adıyaman, Kilis).",
+  "logo_url": "https://bulgangeridonusum.com.tr/images/icon-512.png",
+  "contact_email": "bulganorhan19@gmail.com",
+  "legal_info_url": "https://bulgangeridonusum.com.tr/kullanim-kosullari.html"
+}

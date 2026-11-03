@@ -20,14 +20,12 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Borsa Hurda Fiyatlarını Çek ve %20 Azaltma Uygula
+      - name: Borsa Hurda Fiyatlarını Çek, %20 Azaltma Uygula ve Rapor Gönder
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
         run: |
-          python -c "
-          import scraper_daily_prices
-          scraper_daily_prices.ROOT = '.'
-          scraper_daily_prices.DATA_DIR = './data'
-          scraper_daily_prices.build_prices_payload()
-          "
+          python scraper_daily_prices.py --notify-email
 
       - name: Güncel Fiyatları Kaydet
         run: |

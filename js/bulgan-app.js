@@ -1,359 +1,369 @@
 /* ==========================================================================
-   BULGAN HURDACILIK & GERİ DÖNÜŞÜM — LIVE PRICE ENGINE, CALCULATOR & UI
+   BULGAN HURDACILIK & GERİ DÖNÜŞÜM — İSTEMCİ UYGULAMA MOTORU
+   Canlı Borsa Veri Eşitleme (-%20 Net Kantar), Hesaplama Aracı & Form Doğrulama
    ========================================================================== */
 
 (function () {
   "use strict";
 
-  const PHONE_RAW = "905459043834";
-  let priceCatalog = [];
+  let priceCatalog = null;
   let basket = [];
 
   function formatTL(num) {
-    return new Intl.NumberFormat("tr-TR", {
+    return Number(num || 0).toLocaleString("tr-TR", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
-    }).format(num) + " ₺";
+    }) + " TL";
   }
 
-  // 1. Mobile Navigation Drawer
-  const mobileBtn = document.getElementById("mobileMenuBtn");
-  const mobileDrawer = document.getElementById("mobileDrawer");
-  if (mobileBtn && mobileDrawer) {
-    mobileBtn.addEventListener("click", function () {
-      const isOpen = mobileDrawer.classList.toggle("open");
-      mobileBtn.setAttribute("aria-expanded", String(isOpen));
-      mobileBtn.innerHTML = isOpen ? "✕" : "☰";
+  // 1. Mobil Menü Kontrolü
+  function initMobileNav() {
+    const btn = document.getElementById("mobileMenuBtn");
+    const nav = document.getElementById("mainNav");
+    if (!btn || !nav) return;
+
+    btn.addEventListener("click", function () {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!expanded));
+      nav.classList.toggle("open");
     });
   }
 
-  // 2. Fetch Live Daily Scrap Prices (/api/prices -> fallback /data/prices.json)
+  // 2. Canlı Fiyat Verisini Çek (/api/prices -> /data/prices.json)
   async function loadPrices() {
-    let data = null;
     try {
-      const res = await fetch("/api/prices", { cache: "no-cache" });
+      const res = await fetch("/api/prices", { headers: { Accept: "application/json" } });
       if (res.ok) {
-        data = await res.json();
+        priceCatalog = await res.json();
+        applyPricesToDOM(priceCatalog);
+        return;
       }
     } catch (_) {}
 
-    if (!data || !Array.isArray(data.categories)) {
-      try {
-        const resLocal = await fetch("/data/prices.json", { cache: "no-cache" });
-        if (resLocal.ok) {
-          data = await resLocal.json();
-        }
-      } catch (_) {}
+    try {
+      const fallback = await fetch("/data/prices.json");
+      if (fallback.ok) {
+        priceCatalog = await fallback.json();
+        applyPricesToDOM(priceCatalog);
+      }
+    } catch (err) {
+      console.error("Fiyat verisi yüklenemedi:", err);
     }
+  }
 
+  function applyPricesToDOM(data) {
     if (!data || !Array.isArray(data.categories)) return;
-    priceCatalog = data.categories;
 
-    // Update timestamps & exchange ticker
-    document.querySelectorAll("[data-updated-at]").forEach((el) => {
+    // Güncelleme tarihi ve kurlar
+    document.querySelectorAll("[data-live-updated]").forEach(function (el) {
       el.textContent = data.updatedAt || "Bugün";
     });
     if (data.exchange) {
-      document.querySelectorAll("[data-usd-try]").forEach((el) => {
-        el.textContent = data.exchange.USD_TRY + " ₺";
+      document.querySelectorAll("[data-live-usd]").forEach(function (el) {
+        el.textContent = Number(data.exchange.USD_TRY).toFixed(2) + " TL";
       });
-      document.querySelectorAll("[data-eur-try]").forEach((el) => {
-        el.textContent = data.exchange.EUR_TRY + " ₺";
+      document.querySelectorAll("[data-live-eur]").forEach(function (el) {
+        el.textContent = Number(data.exchange.EUR_TRY).toFixed(2) + " TL";
       });
     }
 
-    // Build flat lookup map for table cells
-    const itemMap = {};
-    priceCatalog.forEach((cat) => {
-      cat.items.forEach((item) => {
-        itemMap[item.code] = item;
+    // Tablo hücrelerini kod bazlı güncelle
+    const codeMap = {};
+    data.categories.forEach(function (cat) {
+      (cat.items || []).forEach(function (item) {
+        codeMap[item.code] = item;
       });
     });
 
-    document.querySelectorAll("[data-price-code]").forEach((el) => {
-      const code = el.getAttribute("data-price-code");
-      if (itemMap[code]) {
-        el.textContent = formatTL(itemMap[code].price) + " / KG";
-      }
+    document.querySelectorAll("[data-item-code]").forEach(function (row) {
+      const code = row.getAttribute("data-item-code");
+      const info = codeMap[code];
+      if (!info) return;
+      const mCell = row.querySelector("[data-col-market]");
+      const nCell = row.querySelector("[data-col-net]");
+      if (mCell) mCell.textContent = formatTL(info.marketPrice);
+      if (nCell) nCell.textContent = formatTL(info.price) + " / " + info.unit;
     });
 
-    document.querySelectorAll("[data-ton-code]").forEach((el) => {
-      const code = el.getAttribute("data-ton-code");
-      if (itemMap[code]) {
-        el.textContent = formatTL(itemMap[code].tonPrice) + " / TON";
-      }
-    });
-
-    initCalculator();
+    initCalculator(data);
   }
 
-  // 3. Interactive Digital Kantar & Multi-Item Scrap Calculator
-  function initCalculator() {
+  // 3. Canlı Hurda Hesaplama Aracı
+  function initCalculator(data) {
     const catSelect = document.getElementById("calcCategory");
-    const itemSelect = document.getElementById("calcSubItem");
+    const itemSelect = document.getElementById("calcItem");
     const weightInput = document.getElementById("calcWeight");
     const unitSelect = document.getElementById("calcUnit");
     const citySelect = document.getElementById("calcCity");
-    const lcdRate = document.getElementById("lcdUnitRate");
-    const lcdTotal = document.getElementById("lcdTotalAmount");
+
+    const unitMarketEl = document.getElementById("calcMarketUnit");
+    const unitNetEl = document.getElementById("calcNetUnit");
+    const totalEl = document.getElementById("calcTotalAmount");
     const addBasketBtn = document.getElementById("calcAddBasketBtn");
-    const basketContainer = document.getElementById("calcBasketList");
-    const whatsappSendBtn = document.getElementById("calcWhatsappBtn");
+    const basketWrap = document.getElementById("calcBasketList");
+    const waQuoteBtn = document.getElementById("calcWaBtn");
 
-    if (!catSelect || !itemSelect || !weightInput || !lcdTotal) return;
+    if (!catSelect || !itemSelect || !weightInput) return;
 
-    // Populate categories
+    // Kategorileri doldur
     catSelect.innerHTML = "";
-    priceCatalog.forEach((cat) => {
+    data.categories.forEach(function (cat, idx) {
       const opt = document.createElement("option");
-      opt.value = cat.id;
+      opt.value = String(idx);
       opt.textContent = cat.shortName + " (" + cat.items.length + " Kalem)";
       catSelect.appendChild(opt);
     });
 
-    function populateSubItems() {
-      const selectedCatId = catSelect.value;
-      const catObj = priceCatalog.find((c) => c.id === selectedCatId) || priceCatalog[0];
+    function populateItems() {
+      const cIdx = parseInt(catSelect.value, 10) || 0;
+      const cat = data.categories[cIdx] || data.categories[0];
       itemSelect.innerHTML = "";
-      if (!catObj) return;
-      catObj.items.forEach((it) => {
+      (cat.items || []).forEach(function (it, iIdx) {
         const opt = document.createElement("option");
-        opt.value = it.code;
-        opt.dataset.price = String(it.price);
-        opt.dataset.name = it.name;
-        opt.textContent = `${it.name} — ${formatTL(it.price)}/KG`;
+        opt.value = String(iIdx);
+        opt.textContent = it.name + " — " + formatTL(it.price) + "/KG";
         itemSelect.appendChild(opt);
       });
-      computeCurrent();
+      recalc();
     }
 
     function getCurrentSelection() {
-      const selOpt = itemSelect.options[itemSelect.selectedIndex];
-      const unitPrice = selOpt ? parseFloat(selOpt.dataset.price || "0") : 0;
-      const itemName = selOpt ? selOpt.dataset.name : "Hurda Metal";
-      const rawWeight = parseFloat(weightInput.value) || 0;
-      const unit = unitSelect ? unitSelect.value : "KG";
-      const kgWeight = unit === "TON" ? rawWeight * 1000 : rawWeight;
-      const lineTotal = kgWeight * unitPrice;
-      return { itemName, unitPrice, rawWeight, unit, kgWeight, lineTotal };
+      const cIdx = parseInt(catSelect.value, 10) || 0;
+      const iIdx = parseInt(itemSelect.value, 10) || 0;
+      const cat = data.categories[cIdx] || data.categories[0];
+      const item = (cat && cat.items[iIdx]) || (cat && cat.items[0]);
+      const rawWeight = parseFloat(weightInput.value);
+      const weight = isNaN(rawWeight) || rawWeight < 0 ? 0 : rawWeight;
+      const isTon = unitSelect && unitSelect.value === "TON";
+      const kg = isTon ? weight * 1000 : weight;
+      const city = citySelect ? citySelect.value : "Mardin (Kızıltepe)";
+      return { cat: cat, item: item, weight: weight, isTon: isTon, kg: kg, city: city };
     }
 
-    function computeCurrent() {
-      const cur = getCurrentSelection();
-      if (lcdRate) {
-        lcdRate.textContent = `Birim: ${formatTL(cur.unitPrice)} / KG (-%20 Borsa Net)`;
+    function recalc() {
+      const sel = getCurrentSelection();
+      if (!sel.item) return;
+
+      if (unitMarketEl) unitMarketEl.textContent = formatTL(sel.item.marketPrice) + " / KG";
+      if (unitNetEl) unitNetEl.textContent = formatTL(sel.item.price) + " / KG";
+
+      const currentLineTotal = sel.kg * sel.item.price;
+      const basketTotal = basket.reduce(function (acc, b) {
+        return acc + b.total;
+      }, 0);
+
+      const grandTotal = basket.length > 0 ? basketTotal : currentLineTotal;
+      if (totalEl) totalEl.textContent = formatTL(grandTotal);
+
+      if (waQuoteBtn) {
+        let lines = [];
+        if (basket.length > 0) {
+          basket.forEach(function (b, i) {
+            lines.push(
+              (i + 1) + ". " + b.name + " (" + b.kg + " KG x " + b.unitPrice.toFixed(2) + " TL = " + formatTL(b.total) + ")"
+            );
+          });
+        } else {
+          lines.push("- " + sel.item.name + ": " + sel.kg + " KG (" + formatTL(currentLineTotal) + ")");
+        }
+        const msg =
+          "Merhaba Bulgan Hurdacılık, web sitenizdeki canlı kantar hesaplama aracından yazıyorum.\n" +
+          "Konum: " + sel.city + "\n" +
+          "Hurda Listesi:\n" +
+          lines.join("\n") +
+          "\nTahmini Net Kantar Tutarı (-%20 Baz): " + formatTL(grandTotal) +
+          "\nYerinde tartım ve nakit alım için dönüş rica ederim.";
+        waQuoteBtn.href = "https://wa.me/905459043834?text=" + encodeURIComponent(msg);
       }
-      const basketSum = basket.reduce((acc, b) => acc + b.lineTotal, 0);
-      const grandTotal = basket.length > 0 ? basketSum : cur.lineTotal;
-      lcdTotal.textContent = formatTL(grandTotal);
     }
 
     function renderBasket() {
-      if (!basketContainer) return;
+      if (!basketWrap) return;
       if (basket.length === 0) {
-        basketContainer.style.display = "none";
-        computeCurrent();
+        basketWrap.innerHTML = "";
+        recalc();
         return;
       }
-      basketContainer.style.display = "block";
-      basketContainer.innerHTML = basket
-        .map(
-          (b, idx) => `
-          <div class="calc-basket-item">
-            <span><strong>${b.itemName}</strong> (${b.rawWeight} ${b.unit})</span>
-            <span>
-              <strong>${formatTL(b.lineTotal)}</strong>
-              <button type="button" class="calc-basket-remove" data-idx="${idx}" title="Kaldır">✕</button>
-            </span>
-          </div>`
-        )
+      basketWrap.innerHTML = basket
+        .map(function (b, idx) {
+          return (
+            '<div class="calc-basket-item">' +
+            "<span>" + b.name + " (" + b.kg + " KG)</span>" +
+            '<span><strong>' + formatTL(b.total) + '</strong> <button type="button" class="calc-basket-remove" data-rm="' + idx + '" aria-label="Kalemi Sil">&times;</button></span>' +
+            "</div>"
+          );
+        })
         .join("");
 
-      basketContainer.querySelectorAll(".calc-basket-remove").forEach((btn) => {
+      basketWrap.querySelectorAll("[data-rm]").forEach(function (btn) {
         btn.addEventListener("click", function () {
-          const i = parseInt(btn.getAttribute("data-idx"), 10);
-          basket.splice(i, 1);
+          const rmIdx = parseInt(btn.getAttribute("data-rm"), 10);
+          basket.splice(rmIdx, 1);
           renderBasket();
         });
       });
-      computeCurrent();
+      recalc();
     }
-
-    catSelect.addEventListener("change", populateSubItems);
-    itemSelect.addEventListener("change", computeCurrent);
-    weightInput.addEventListener("input", computeCurrent);
-    if (unitSelect) unitSelect.addEventListener("change", computeCurrent);
 
     if (addBasketBtn) {
       addBasketBtn.addEventListener("click", function () {
-        const cur = getCurrentSelection();
-        if (cur.kgWeight <= 0) {
-          weightInput.focus();
-          return;
-        }
-        basket.push(cur);
+        const sel = getCurrentSelection();
+        if (!sel.item || sel.kg <= 0) return;
+        basket.push({
+          name: sel.item.name,
+          kg: sel.kg,
+          unitPrice: sel.item.price,
+          total: sel.kg * sel.item.price
+        });
         renderBasket();
       });
     }
 
-    if (whatsappSendBtn) {
-      whatsappSendBtn.addEventListener("click", function () {
-        const loc = citySelect ? citySelect.value : "Mardin / Güneydoğu Anadolu";
-        const itemsToSend = basket.length > 0 ? basket : [getCurrentSelection()];
-        let total = 0;
-        const lines = itemsToSend.map((it, idx) => {
-          total += it.lineTotal;
-          return `${idx + 1}. ${it.itemName}: ${it.rawWeight} ${it.unit} x ${formatTL(it.unitPrice)} = ${formatTL(it.lineTotal)}`;
-        });
-        const msg =
-          `Merhaba *Bulgan Hurdacılık*, web sitenizdeki Canlı Kantar Hesaplama Aracı ile fiyat hesapladım:\n\n` +
-          `📍 *Bölge:* ${loc}\n` +
-          lines.join("\n") +
-          `\n\n💰 *Tahmini Toplam Nakit Tutar:* ${formatTL(total)}\n` +
-          `Yerinde tartım ve nakit alım için dönüş yapabilir misiniz?`;
-        trackConversion("calculator_whatsapp_click", { value: total, location: loc });
-        window.open(`https://wa.me/${PHONE_RAW}?text=${encodeURIComponent(msg)}`, "_blank");
-      });
-    }
+    catSelect.addEventListener("change", populateItems);
+    itemSelect.addEventListener("change", recalc);
+    weightInput.addEventListener("input", recalc);
+    if (unitSelect) unitSelect.addEventListener("change", recalc);
+    if (citySelect) citySelect.addEventListener("change", recalc);
 
-    populateSubItems();
+    populateItems();
   }
 
-  // 4. Filterable Price Table Tabs & Search
-  const tabs = document.querySelectorAll(".price-tab");
-  const blocks = document.querySelectorAll(".price-category-block");
-  const searchInput = document.getElementById("priceSearchInput");
+  // 4. İletişim ve Kantar Çağrı Formu Doğrulama + Sunucu Gönderimi
+  function initContactForms() {
+    const forms = document.querySelectorAll(".js-bulgan-form");
+    forms.forEach(function (form) {
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", function () {
-      tabs.forEach((t) => t.classList.remove("active"));
-      tab.classList.add("active");
-      const filterId = tab.getAttribute("data-filter");
-      blocks.forEach((blk) => {
-        if (filterId === "all" || blk.getAttribute("data-cat-id") === filterId) {
-          blk.style.display = "block";
-        } else {
-          blk.style.display = "none";
+        const nameInput = form.querySelector('[name="name"]');
+        const phoneInput = form.querySelector('[name="phone"]');
+        const cityInput = form.querySelector('[name="city"]');
+        const matInput = form.querySelector('[name="material"]');
+        const weightInput = form.querySelector('[name="weight"]');
+        const noteInput = form.querySelector('[name="note"]');
+        const submitBtn = form.querySelector('button[type="submit"]');
+
+        let valid = true;
+
+        function setErr(input, msgId, show) {
+          if (!input) return;
+          input.classList.toggle("input-error", show);
+          const errEl = form.querySelector("#" + msgId);
+          if (errEl) errEl.classList.toggle("visible", show);
+          if (show) valid = false;
         }
-      });
-    });
-  });
 
-  if (searchInput) {
-    searchInput.addEventListener("input", function () {
-      const q = searchInput.value.trim().toLowerCase();
-      blocks.forEach((blk) => {
-        const rows = blk.querySelectorAll("tbody tr");
-        let visibleCount = 0;
-        rows.forEach((r) => {
-          const txt = r.textContent.toLowerCase();
-          const show = !q || txt.includes(q);
-          r.style.display = show ? "" : "none";
-          if (show) visibleCount++;
-        });
-        blk.style.display = visibleCount > 0 ? "block" : "none";
+        const nameVal = nameInput ? nameInput.value.trim() : "";
+        const phoneVal = phoneInput ? phoneInput.value.replace(/\D/g, "") : "";
+
+        setErr(nameInput, "errName", nameVal.length < 2);
+        setErr(phoneInput, "errPhone", phoneVal.length < 10);
+
+        if (!valid) return;
+
+        const origText = submitBtn ? submitBtn.textContent : "Gönder";
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Kantar Merkezine İletiliyor...";
+        }
+
+        const payload = {
+          name: nameVal,
+          phone: phoneInput ? phoneInput.value.trim() : "",
+          city: cityInput ? cityInput.value : "Mardin",
+          material: matInput ? matInput.value : "Genel Hurda",
+          weight: weightInput ? weightInput.value.trim() : "",
+          note: noteInput ? noteInput.value.trim() : ""
+        };
+
+        try {
+          await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+        } catch (_) {}
+
+        window.location.href =
+          "/tesekkurler.html?name=" +
+          encodeURIComponent(payload.name) +
+          "&city=" +
+          encodeURIComponent(payload.city) +
+          "&material=" +
+          encodeURIComponent(payload.material);
       });
     });
   }
 
-  // 5. Form Validation, Loading States & Thank You Redirect (Checklist #12, #13, #14)
-  document.querySelectorAll("form[data-bulgan-form]").forEach((form) => {
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      let valid = true;
-
-      const nameField = form.querySelector("[name='fullName']");
-      const phoneField = form.querySelector("[name='phone']");
-      const regionField = form.querySelector("[name='region']");
-      const typeField = form.querySelector("[name='scrapType']");
-      const weightField = form.querySelector("[name='weight']");
-      const notesField = form.querySelector("[name='notes']");
-
-      [nameField, phoneField].forEach((field) => {
-        if (!field) return;
-        const wrap = field.closest(".calc-form-group");
-        const val = field.value.trim();
-        if (!val || (field === phoneField && val.replace(/\D/g, "").length < 10)) {
-          valid = false;
-          if (wrap) wrap.classList.add("has-error");
-        } else {
-          if (wrap) wrap.classList.remove("has-error");
-        }
-      });
-
-      if (!valid) return;
-
-      const submitBtn = form.querySelector("button[type='submit']");
-      if (submitBtn) {
-        submitBtn.classList.add("loading");
-        submitBtn.disabled = true;
+  // 5. KVKK Çerez Tercih Yönetimi
+  function initCookieBanner() {
+    const bar = document.getElementById("cookieBanner");
+    if (!bar) return;
+    try {
+      if (!localStorage.getItem("bulgan_cookie_consent")) {
+        bar.classList.add("visible");
       }
+    } catch (_) {}
 
-      const summary = {
-        fullName: nameField ? nameField.value.trim() : "",
-        phone: phoneField ? phoneField.value.trim() : "",
-        region: regionField ? regionField.value : "Mardin",
-        scrapType: typeField ? typeField.value : "Genel Hurda",
-        weight: weightField ? weightField.value : "Belirtilmedi",
-        notes: notesField ? notesField.value.trim() : ""
-      };
+    const acceptBtn = document.getElementById("cookieAcceptBtn");
+    const essentialBtn = document.getElementById("cookieEssentialBtn");
 
+    function saveChoice(val) {
       try {
-        sessionStorage.setItem("bulgan_last_lead", JSON.stringify(summary));
+        localStorage.setItem("bulgan_cookie_consent", val);
       } catch (_) {}
-
-      trackConversion("lead_form_submit", summary);
-
-      setTimeout(function () {
-        window.location.href = "/tesekkurler.html";
-      }, 650);
-    });
-  });
-
-  // 6. Cookie Consent Banner (Checklist #17)
-  const cookieBanner = document.getElementById("cookieBanner");
-  const acceptAllBtn = document.getElementById("cookieAcceptAll");
-  const acceptEssentialBtn = document.getElementById("cookieAcceptEssential");
-
-  try {
-    const consent = localStorage.getItem("bulgan_cookie_consent");
-    if (!consent && cookieBanner) {
-      cookieBanner.classList.add("show");
+      bar.classList.remove("visible");
     }
-  } catch (_) {}
 
-  if (acceptAllBtn) {
-    acceptAllBtn.addEventListener("click", function () {
-      try {
-        localStorage.setItem("bulgan_cookie_consent", JSON.stringify({ analytics: true, essential: true, ts: Date.now() }));
-      } catch (_) {}
-      if (cookieBanner) cookieBanner.classList.remove("show");
-    });
-  }
-
-  if (acceptEssentialBtn) {
-    acceptEssentialBtn.addEventListener("click", function () {
-      try {
-        localStorage.setItem("bulgan_cookie_consent", JSON.stringify({ analytics: false, essential: true, ts: Date.now() }));
-      } catch (_) {}
-      if (cookieBanner) cookieBanner.classList.remove("show");
-    });
-  }
-
-  // 7. Conversion & Analytics Helper (Checklist #18)
-  function trackConversion(eventName, params) {
-    if (typeof window.gtag === "function") {
-      window.gtag("event", eventName, params || {});
+    if (acceptBtn) {
+      acceptBtn.addEventListener("click", function () {
+        saveChoice("all");
+      });
+    }
+    if (essentialBtn) {
+      essentialBtn.addEventListener("click", function () {
+        saveChoice("essential");
+      });
     }
   }
 
-  document.querySelectorAll("a[href^='tel:'], a[href*='wa.me']").forEach((link) => {
-    link.addEventListener("click", function () {
-      const isWa = link.href.includes("wa.me");
-      trackConversion(isWa ? "whatsapp_click" : "phone_call_click", { href: link.href });
-    });
+  document.addEventListener("DOMContentLoaded", function () {
+    initMobileNav();
+    loadPrices();
+    initContactForms();
+    initCookieBanner();
   });
+})();
 
-  // Initialize prices & calculator on load
-  loadPrices();
+
+// ==========================================================================
+// 6. GOOGLE ADS DÖNÜŞÜM TAKİBİ & ADSENSE REKLAM YERLEŞİM ALTYAPISI
+// (mehmethilmiozkan@gmail.com / bulganorhan19@gmail.com)
+// ==========================================================================
+(function () {
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    window.dataLayer.push(arguments);
+  }
+  window.gtag = window.gtag || gtag;
+
+  document.addEventListener("click", function (e) {
+    const link = e.target && e.target.closest ? e.target.closest("a") : null;
+    if (!link) return;
+    const href = link.getAttribute("href") || "";
+
+    if (href.startsWith("tel:")) {
+      window.dataLayer.push({
+        event: "phone_call_click",
+        phone_number: href.replace("tel:", ""),
+        page_path: window.location.pathname
+      });
+    } else if (href.includes("wa.me/")) {
+      window.dataLayer.push({
+        event: "whatsapp_click",
+        whatsapp_url: href,
+        page_path: window.location.pathname
+      });
+    }
+  });
 })();

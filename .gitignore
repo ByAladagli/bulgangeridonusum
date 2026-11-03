@@ -1,0 +1,7 @@
+.env
+.env.*
+*.pyc
+__pycache__/
+.wrangler/
+node_modules/
+raw_ai/

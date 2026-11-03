@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "site": "https://bulgangeridonusum.com.tr",
+  "organization": "Bulgan Hurdacılık & Geri Dönüşüm",
+  "google_business_profile": {
+    "address": "Atatürk Mahallesi, İpekyolu Sanayi Aksı, 47400 Kızıltepe / Mardin",
+    "email": "bulganorhan19@gmail.com",
+    "telephone": "+905459043834",
+    "coordinates": {
+      "latitude": 37.1939,
+      "longitude": 40.5861
+    }
+  },
+  "service_region_strict": [
+    "Mardin",
+    "Kızıltepe",
+    "Artuklu",
+    "Midyat",
+    "Nusaybin",
+    "Derik",
+    "Mazıdağı",
+    "Dargeçit",
+    "Savur",
+    "Yeşilli",
+    "Ömerli",
+    "Diyarbakır",
+    "Şanlıurfa",
+    "Gaziantep",
+    "Batman",
+    "Şırnak",
+    "Siirt",
+    "Adıyaman",
+    "Kilis"
+  ],
+  "permissions": {
+    "crawling": "allowed",
+    "ai_citations": "allowed",
+    "price_api_query": "allowed",
+    "lead_submission": "allowed"
+  },
+  "endpoints": {
+    "live_prices_json": "https://bulgangeridonusum.com.tr/api/prices",
+    "static_prices_json": "https://bulgangeridonusum.com.tr/data/prices.json",
+    "contact_submission_post": "https://bulgangeridonusum.com.tr/api/contact",
+    "llms_summary": "https://bulgangeridonusum.com.tr/llms.txt",
+    "llms_full": "https://bulgangeridonusum.com.tr/llms-full.txt"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "03.11.2026 19:31",
+  "updatedAt": "03.11.2026 20:08",
   "dateIso": "2026-11-03",
   "discountApplied": "-%20 (Borsa Baz Fiyatından %20 Azaltılmış Net Alım Fiyatı)",
   "discountFactor": 0.8,
@@ -7,16 +7,16 @@
     "USD_TRY": 49.99,
     "EUR_TRY": 55.96
   },
-  "source": "LME + Piyasa Canlı Endeksi (%20 İskontolu)",
+  "source": "LME + Piyasa Canlı Endeksi (%20 Net Kantar İskontolu)",
   "categories": [
     {
       "id": "bakir",
       "name": "Bakır Hurda Fiyatları",
       "shortName": "Hurda Bakır",
       "slug": "bakir-hurda-fiyatlari.html",
-      "image": "images/bakir-hurda-1.webp",
-      "fallbackImage": "images/bakir-hurda-1.jpg",
-      "badge": "LME Borsa Endeksli",
+      "image": "images/bakir.webp",
+      "fallbackImage": "images/bakir.jpg",
+      "badge": "LME Referanslı",
       "desc": "Mardin ve Güneydoğu Anadolu genelinde soyma bakır, lama, kırkambar, antigron kırma ve bakır talaşı alımı.",
       "items": [
         {
@@ -30,10 +30,10 @@
         {
           "code": "bakir_antigron",
           "name": "Antigron Kırma Bakır Hurdası",
-          "marketPrice": 686.02,
-          "price": 548.82,
+          "marketPrice": 686.65,
+          "price": 549.32,
           "unit": "KG",
-          "tonPrice": 548820.0
+          "tonPrice": 549320.0
         },
         {
           "code": "bakir_katot",
@@ -54,10 +54,10 @@
         {
           "code": "bakir_filmasin",
           "name": "Bakır Filmaşin (F8) Parlak",
-          "marketPrice": 600.9,
-          "price": 480.72,
+          "marketPrice": 600.73,
+          "price": 480.58,
           "unit": "KG",
-          "tonPrice": 480720.0
+          "tonPrice": 480580.0
         },
         {
           "code": "bakir_talas",
@@ -70,10 +70,10 @@
         {
           "code": "bakir_petek",
           "name": "Bakır Petek (Radyatör) Hurdası",
-          "marketPrice": 580.05,
-          "price": 464.04,
+          "marketPrice": 580.37,
+          "price": 464.3,
           "unit": "KG",
-          "tonPrice": 464040.0
+          "tonPrice": 464300.0
         },
         {
           "code": "bakir_tel",
@@ -98,10 +98,10 @@
       "name": "Kablo Hurda Fiyatları",
       "shortName": "Hurda Kablo",
       "slug": "kablo-hurda-fiyatlari.html",
-      "image": "images/kablo-hurda-1.webp",
-      "fallbackImage": "images/kablo-hurda-1.jpg",
-      "badge": "Bakır Oranlı Tartım",
-      "desc": "Şantiye, fabrika, enerji nakil hattı, yeraltı, TTR, NYA ve antigron hurda kabloların yüksek randımanla alımı.",
+      "image": "images/kablo.webp",
+      "fallbackImage": "images/kablo.jpg",
+      "badge": "Randıman Analizli",
+      "desc": "Şantiye, fabrika, enerji nakil hattı, yeraltı, TTR, NYA ve dalgıç pompa kablolarının soyma/kırma randımanıyla alımı.",
       "items": [
         {
           "code": "kablo_dalgic",
@@ -174,9 +174,9 @@
       "name": "Demir Hurda Fiyatları",
       "shortName": "Hurda Demir",
       "slug": "demir-hurda-fiyatlari.html",
-      "image": "images/demir-hurda-1.webp",
-      "fallbackImage": "images/demir-hurda-1.jpg",
-      "badge": "Tonajlı Şantiye Alımı",
+      "image": "images/demir.webp",
+      "fallbackImage": "images/demir.jpg",
+      "badge": "Tonajlı Saha Alımı",
       "desc": "Mardin, Kızıltepe, Diyarbakır, Şanlıurfa ve Gaziantep genelinde DKP, ekstra, inşaat demiri, profil ve çelik konstrüksiyon hurda alımı.",
       "items": [
         {
@@ -190,26 +190,26 @@
         {
           "code": "demir_insaat",
           "name": "İnşaat Demir Çubuğu & Filmaşin",
-          "marketPrice": 15.28,
-          "price": 12.22,
+          "marketPrice": 15.59,
+          "price": 12.47,
           "unit": "KG",
-          "tonPrice": 12220.0
+          "tonPrice": 12470.0
         },
         {
           "code": "demir_santiye",
           "name": "Şantiye Kırpıntı & H-Demir Hurdası",
-          "marketPrice": 15.14,
-          "price": 12.11,
+          "marketPrice": 15.73,
+          "price": 12.58,
           "unit": "KG",
-          "tonPrice": 12110.0
+          "tonPrice": 12580.0
         },
         {
           "code": "demir_imalat",
           "name": "İmalat Artığı Lazer Kesim Sac",
-          "marketPrice": 630.04,
-          "price": 504.03,
+          "marketPrice": 630.88,
+          "price": 504.7,
           "unit": "KG",
-          "tonPrice": 504030.0
+          "tonPrice": 504700.0
         },
         {
           "code": "demir_dkp",
@@ -250,18 +250,18 @@
       "name": "Alüminyum Hurda Fiyatları",
       "shortName": "Hurda Alüminyum",
       "slug": "aluminyum-hurda-fiyatlari.html",
-      "image": "images/aluminyum-hurda-1.webp",
-      "fallbackImage": "images/aluminyum-hurda-1.jpg",
-      "badge": "Tel & Profil Alüminyum",
+      "image": "images/aluminyum.webp",
+      "fallbackImage": "images/aluminyum.jpg",
+      "badge": "Tel & Profil",
       "desc": "Elektrik teli alüminyumu, boyasız profil, araiş levha, jant, ofset matbaa kalıbı ve alüminyum radyatör alımı.",
       "items": [
         {
           "code": "alu_bakirli_radyator",
           "name": "Bakırlı Alüminyum Klima Radyatörü",
-          "marketPrice": 355.23,
-          "price": 284.18,
+          "marketPrice": 355.33,
+          "price": 284.26,
           "unit": "KG",
-          "tonPrice": 284180.0
+          "tonPrice": 284260.0
         },
         {
           "code": "alu_tel",
@@ -326,18 +326,18 @@
         {
           "code": "sari_arais64",
           "name": "Araiş Sarı Hurdası (MS-64 / MS-70)",
-          "marketPrice": 358.47,
-          "price": 286.78,
+          "marketPrice": 358.76,
+          "price": 287.01,
           "unit": "KG",
-          "tonPrice": 286780.0
+          "tonPrice": 287010.0
         },
         {
           "code": "sari_fermuar",
           "name": "Fermuar Talaşı & Pirinç İmalat Artığı",
-          "marketPrice": 313.58,
-          "price": 250.86,
+          "marketPrice": 313.6,
+          "price": 250.88,
           "unit": "KG",
-          "tonPrice": 250860.0
+          "tonPrice": 250880.0
         },
         {
           "code": "sari_cubuk58",
@@ -350,10 +350,10 @@
         {
           "code": "sari_kirkambar",
           "name": "Sarı Kırkambar (Vana, Musluk, Su Saati)",
-          "marketPrice": 288.59,
-          "price": 230.87,
+          "marketPrice": 288.95,
+          "price": 231.16,
           "unit": "KG",
-          "tonPrice": 230870.0
+          "tonPrice": 231160.0
         },
         {
           "code": "sari_talas58",
@@ -366,10 +366,10 @@
         {
           "code": "sari_radyator",
           "name": "Sarı Oto Radyatör Hurdası",
-          "marketPrice": 196.07,
-          "price": 156.86,
+          "marketPrice": 196.32,
+          "price": 157.06,
           "unit": "KG",
-          "tonPrice": 156860.0
+          "tonPrice": 157060.0
         }
       ]
     },
@@ -378,9 +378,9 @@
       "name": "Paslanmaz Krom Hurda Fiyatları",
       "shortName": "Paslanmaz Krom",
       "slug": "paslanmaz-hurda-fiyatlari.html",
-      "image": "images/paslanmaz-hurda-1.webp",
-      "fallbackImage": "images/paslanmaz-hurda-1.jpg",
-      "badge": "304 • 316 • 310 Kalite",
+      "image": "images/paslanmaz.webp",
+      "fallbackImage": "images/paslanmaz.jpg",
+      "badge": "304 • 316 • 310",
       "desc": "Gıda tankları, sanayi kazanları, paslanmaz boru, 304, 316 ve 310 kalite krom sac ve talaş alımı.",
       "items": [
         {
@@ -402,26 +402,26 @@
         {
           "code": "krom_316_talas",
           "name": "316 Kalite Paslanmaz Krom Talaşı",
-          "marketPrice": 112.57,
-          "price": 90.06,
+          "marketPrice": 112.27,
+          "price": 89.82,
           "unit": "KG",
-          "tonPrice": 90060.0
+          "tonPrice": 89820.0
         },
         {
           "code": "krom_304",
           "name": "304 Kalite Paslanmaz Krom Sac & Boru",
-          "marketPrice": 58.93,
-          "price": 47.14,
+          "marketPrice": 58.14,
+          "price": 46.51,
           "unit": "KG",
-          "tonPrice": 47140.0
+          "tonPrice": 46510.0
         },
         {
           "code": "krom_304_talas",
           "name": "304 Kalite Paslanmaz Krom Talaşı",
-          "marketPrice": 58.93,
-          "price": 47.14,
+          "marketPrice": 58.14,
+          "price": 46.51,
           "unit": "KG",
-          "tonPrice": 47140.0
+          "tonPrice": 46510.0
         },
         {
           "code": "krom_201_430",
@@ -438,9 +438,9 @@
       "name": "Akü Hurda Fiyatları",
       "shortName": "Hurda Akü",
       "slug": "aku-hurda-fiyatlari.html",
-      "image": "images/aku-hurda-1.webp",
-      "fallbackImage": "images/aku-hurda-1.jpg",
-      "badge": "UPS & Araç Aküsü",
+      "image": "images/aku.webp",
+      "fallbackImage": "images/aku.jpg",
+      "badge": "UPS & Ağır Vasıta",
       "desc": "Ağır vasıta, traktör, güneş enerjisi (GES), baz istasyonu UPS jel akü ve forklift aküleri alımı.",
       "items": [
         {
@@ -482,8 +482,8 @@
       "name": "Çinko Hurda Fiyatları",
       "shortName": "Hurda Çinko",
       "slug": "cinko-hurda-fiyatlari.html",
-      "image": "images/cinko-hurda-1.webp",
-      "fallbackImage": "images/cinko-hurda-1.jpg",
+      "image": "images/cinko.webp",
+      "fallbackImage": "images/cinko.jpg",
       "badge": "Levha & Külçe",
       "desc": "Çatı oluk sökümü çinko, zamak, külçe çinko ve galvaniz cüruf alımı.",
       "items": [
@@ -518,8 +518,8 @@
       "name": "Kurşun Hurda Fiyatları",
       "shortName": "Hurda Kurşun",
       "slug": "kursun-hurda-fiyatlari.html",
-      "image": "images/kursun-hurda-1.webp",
-      "fallbackImage": "images/kursun-hurda-1.jpg",
+      "image": "images/kursun.webp",
+      "fallbackImage": "images/kursun.jpg",
       "badge": "Minare & Levha",
       "desc": "Cami kubbe ve minare söküm kurşunu, röntgen odası zırh kurşunu ve kurşun boru alımı.",
       "items": [
@@ -534,10 +534,10 @@
         {
           "code": "kursun_boru",
           "name": "Hurda Kurşun Boru & Kablo Zırhı",
-          "marketPrice": 87.05,
-          "price": 69.64,
+          "marketPrice": 87.47,
+          "price": 69.98,
           "unit": "KG",
-          "tonPrice": 69640.0
+          "tonPrice": 69980.0
         },
         {
           "code": "kursun_cati",
@@ -556,7 +556,7 @@
       "slug": "nikel-hurda-fiyatlari.html",
       "image": "images/nikel-hurda.webp",
       "fallbackImage": "images/nikel-hurda.jpg",
-      "badge": "%99 Saf Anot",
+      "badge": "Saf Anot & Şablon",
       "desc": "Kaplama tesisleri anot nikel, şablon nikel, turbo nikel ve inconel alaşım alımı.",
       "items": [
         {
@@ -590,18 +590,18 @@
       "name": "Bronz & Kızıl Hurda Fiyatları",
       "shortName": "Bronz & Kızıl",
       "slug": "bronz-hurda-fiyatlari.html",
-      "image": "images/bronz-hurda-1.webp",
-      "fallbackImage": "images/bronz-hurda-1.jpg",
+      "image": "images/bronz.png.webp",
+      "fallbackImage": "images/bronz.png.jpg",
       "badge": "Fosfor Bronz & RG5",
       "desc": "Ağır sanayi dişli yatakları, burçlar, fosfor bronz, kızıl parça RG5 ve talaş alımı.",
       "items": [
         {
           "code": "bronz_fosfor",
-          "name": "Fosfor Bronz (kalaylı) Levha & Parça",
-          "marketPrice": 582.7,
-          "price": 466.16,
+          "name": "Fosfor Bronz (Kalaylı) Levha & Parça",
+          "marketPrice": 582.41,
+          "price": 465.93,
           "unit": "KG",
-          "tonPrice": 466160.0
+          "tonPrice": 465930.0
         },
         {
           "code": "bronz_parca",
@@ -622,10 +622,10 @@
         {
           "code": "bronz_rg5",
           "name": "Kızıl Parça (RG5 / RG7 Vana & Burç)",
-          "marketPrice": 330.98,
-          "price": 264.78,
+          "marketPrice": 330.04,
+          "price": 264.03,
           "unit": "KG",
-          "tonPrice": 264780.0
+          "tonPrice": 264030.0
         }
       ]
     },
@@ -634,8 +634,8 @@
       "name": "Elektronik Kart Hurda Fiyatları",
       "shortName": "Elektronik Hurda",
       "slug": "elektronik-hurda-fiyatlari.html",
-      "image": "images/elektronik-hurda-1.webp",
-      "fallbackImage": "images/elektronik-hurda-1.jpg",
+      "image": "images/elektronik.png.webp",
+      "fallbackImage": "images/elektronik.png.jpg",
       "badge": "Anakart & Sunucu",
       "desc": "Bilgisayar anakartları, sunucu (server) sistemleri, telekom santral kartları, işlemci ve RAM hurdası alımı.",
       "items": [
@@ -650,10 +650,10 @@
         {
           "code": "elek_server",
           "name": "Server (Sunucu) & Laptop Anakartları",
-          "marketPrice": 130.4,
-          "price": 104.32,
+          "marketPrice": 130.52,
+          "price": 104.42,
           "unit": "KG",
-          "tonPrice": 104320.0
+          "tonPrice": 104420.0
         },
         {
           "code": "elek_hdd",
@@ -678,9 +678,9 @@
       "name": "Klima & Chiller Hurda Fiyatları",
       "shortName": "Klima & Chiller",
       "slug": "klima-hurda-fiyatlari.html",
-      "image": "images/klima-hurda-1.webp",
-      "fallbackImage": "images/klima-hurda-1.jpg",
-      "badge": "İklimlendirme Sökümü",
+      "image": "images/klima.png.webp",
+      "fallbackImage": "images/klima.png.jpg",
+      "badge": "Chiller & İklimlendirme",
       "desc": "Merkezi sistem chiller soğutma grupları, VRF üniteleri, split klimalar, kompresör ve bakır boru tesisatı alımı.",
       "items": [
         {
@@ -714,34 +714,34 @@
       "name": "Plastik & PVC Hurda Fiyatları",
       "shortName": "Hurda Plastik",
       "slug": "plastik-hurda-fiyatlari.html",
-      "image": "images/plastik-hurda-1.webp",
-      "fallbackImage": "images/plastik-hurda-1.jpg",
+      "image": "images/plastik.webp",
+      "fallbackImage": "images/plastik.jpg",
       "badge": "Tarımsal & Sanayi",
       "desc": "Sulama boruları, şeffaf sera naylonu, polipropilen (moblen), ABS, PE varil ve PVC pimapen profil alımı.",
       "items": [
         {
           "code": "plastik_naylon",
           "name": "Beyaz Şeffaf Naylon & Sera Örtüsü",
-          "marketPrice": 19.16,
-          "price": 15.33,
+          "marketPrice": 19.69,
+          "price": 15.75,
           "unit": "KG",
-          "tonPrice": 15330.0
+          "tonPrice": 15750.0
         },
         {
           "code": "plastik_moblen",
           "name": "Polipropilen (Moblen) Kasa & Çuval",
-          "marketPrice": 16.95,
-          "price": 13.56,
+          "marketPrice": 16.18,
+          "price": 12.94,
           "unit": "KG",
-          "tonPrice": 13560.0
+          "tonPrice": 12940.0
         },
         {
           "code": "plastik_kristal",
           "name": "Polistiren Kristal & Temiz PET",
-          "marketPrice": 14.67,
-          "price": 11.74,
+          "marketPrice": 14.06,
+          "price": 11.25,
           "unit": "KG",
-          "tonPrice": 11740.0
+          "tonPrice": 11250.0
         },
         {
           "code": "plastik_abs",
@@ -758,9 +758,9 @@
       "name": "Kağıt & Karton Hurda Fiyatları",
       "shortName": "Kağıt & Karton",
       "slug": "kagit-hurda-fiyatlari.html",
-      "image": "images/kagit-hurda-1.webp",
-      "fallbackImage": "images/kagit-hurda-1.jpg",
-      "badge": "Tonajlı Pres Alım",
+      "image": "images/kagit.webp",
+      "fallbackImage": "images/kagit.jpg",
+      "badge": "Presli & Tonajlı",
       "desc": "Fabrika, matbaa, zincir market ve kurumlardan çıkan presli/dökme karton, 1. hamur beyaz kağıt ve arşiv imha hizmeti.",
       "items": [
         {

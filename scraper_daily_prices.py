@@ -1,26 +1,43 @@
 import json
 import os
 import re
+import smtplib
+import ssl
+import sys
 import urllib.request
 from datetime import datetime, timezone, timedelta
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
-ROOT = r"C:\AI-Tools\cloned-sites\bulgangeridonusum"
+sys.stdout.reconfigure(encoding='utf-8')
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(ROOT, "data")
 os.makedirs(DATA_DIR, exist_ok=True)
 
 DISCOUNT_FACTOR = 0.80  # %20 azaltma (Borsa/Piyasa fiyatından %20 indirimli alım baz fiyatı)
 
-# Base reference market prices (100% full market reference before 20% reduction)
-# If live scrape succeeds, live values override these before multiplying by 0.80.
+
+def load_local_env():
+    env_path = os.path.join(ROOT, ".env")
+    if os.path.exists(env_path):
+        with open(env_path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    k, v = line.split("=", 1)
+                    os.environ.setdefault(k.strip(), v.strip())
+
+
 BASE_MARKET_CATALOG = [
     {
         "id": "bakir",
         "name": "Bakır Hurda Fiyatları",
         "shortName": "Hurda Bakır",
         "slug": "bakir-hurda-fiyatlari.html",
-        "image": "images/bakir-hurda-1.webp",
-        "fallbackImage": "images/bakir-hurda-1.jpg",
-        "badge": "LME Borsa Endeksli",
+        "image": "images/bakir.webp",
+        "fallbackImage": "images/bakir.jpg",
+        "badge": "LME Referanslı",
         "desc": "Mardin ve Güneydoğu Anadolu genelinde soyma bakır, lama, kırkambar, antigron kırma ve bakır talaşı alımı.",
         "items": [
             {"code": "bakir_soyma", "name": "Soyma Bakır Hurdası (%99.9 Saf)", "marketPrice": 686.73, "unit": "KG"},
@@ -39,10 +56,10 @@ BASE_MARKET_CATALOG = [
         "name": "Kablo Hurda Fiyatları",
         "shortName": "Hurda Kablo",
         "slug": "kablo-hurda-fiyatlari.html",
-        "image": "images/kablo-hurda-1.webp",
-        "fallbackImage": "images/kablo-hurda-1.jpg",
-        "badge": "Bakır Oranlı Tartım",
-        "desc": "Şantiye, fabrika, enerji nakil hattı, yeraltı, TTR, NYA ve antigron hurda kabloların yüksek randımanla alımı.",
+        "image": "images/kablo.webp",
+        "fallbackImage": "images/kablo.jpg",
+        "badge": "Randıman Analizli",
+        "desc": "Şantiye, fabrika, enerji nakil hattı, yeraltı, TTR, NYA ve dalgıç pompa kablolarının soyma/kırma randımanıyla alımı.",
         "items": [
             {"code": "kablo_dalgic", "name": "Dalgıç Pompa & Tek Damar Kalın Kablo", "marketPrice": 540.13, "unit": "KG"},
             {"code": "kablo_fareyemez", "name": "Fare Yemez & Enerji Kablosu", "marketPrice": 450.52, "unit": "KG"},
@@ -59,9 +76,9 @@ BASE_MARKET_CATALOG = [
         "name": "Demir Hurda Fiyatları",
         "shortName": "Hurda Demir",
         "slug": "demir-hurda-fiyatlari.html",
-        "image": "images/demir-hurda-1.webp",
-        "fallbackImage": "images/demir-hurda-1.jpg",
-        "badge": "Tonajlı Şantiye Alımı",
+        "image": "images/demir.webp",
+        "fallbackImage": "images/demir.jpg",
+        "badge": "Tonajlı Saha Alımı",
         "desc": "Mardin, Kızıltepe, Diyarbakır, Şanlıurfa ve Gaziantep genelinde DKP, ekstra, inşaat demiri, profil ve çelik konstrüksiyon hurda alımı.",
         "items": [
             {"code": "demir_ekstra", "name": "Ekstra Ağır Demir & Profil Hurdası", "marketPrice": 15.77, "unit": "KG"},
@@ -79,9 +96,9 @@ BASE_MARKET_CATALOG = [
         "name": "Alüminyum Hurda Fiyatları",
         "shortName": "Hurda Alüminyum",
         "slug": "aluminyum-hurda-fiyatlari.html",
-        "image": "images/aluminyum-hurda-1.webp",
-        "fallbackImage": "images/aluminyum-hurda-1.jpg",
-        "badge": "Tel & Profil Alüminyum",
+        "image": "images/aluminyum.webp",
+        "fallbackImage": "images/aluminyum.jpg",
+        "badge": "Tel & Profil",
         "desc": "Elektrik teli alüminyumu, boyasız profil, araiş levha, jant, ofset matbaa kalıbı ve alüminyum radyatör alımı.",
         "items": [
             {"code": "alu_bakirli_radyator", "name": "Bakırlı Alüminyum Klima Radyatörü", "marketPrice": 355.46, "unit": "KG"},
@@ -116,9 +133,9 @@ BASE_MARKET_CATALOG = [
         "name": "Paslanmaz Krom Hurda Fiyatları",
         "shortName": "Paslanmaz Krom",
         "slug": "paslanmaz-hurda-fiyatlari.html",
-        "image": "images/paslanmaz-hurda-1.webp",
-        "fallbackImage": "images/paslanmaz-hurda-1.jpg",
-        "badge": "304 • 316 • 310 Kalite",
+        "image": "images/paslanmaz.webp",
+        "fallbackImage": "images/paslanmaz.jpg",
+        "badge": "304 • 316 • 310",
         "desc": "Gıda tankları, sanayi kazanları, paslanmaz boru, 304, 316 ve 310 kalite krom sac ve talaş alımı.",
         "items": [
             {"code": "krom_310", "name": "310 Kalite Ateşe Dayanıklı Paslanmaz Krom", "marketPrice": 120.50, "unit": "KG"},
@@ -134,9 +151,9 @@ BASE_MARKET_CATALOG = [
         "name": "Akü Hurda Fiyatları",
         "shortName": "Hurda Akü",
         "slug": "aku-hurda-fiyatlari.html",
-        "image": "images/aku-hurda-1.webp",
-        "fallbackImage": "images/aku-hurda-1.jpg",
-        "badge": "UPS & Araç Aküsü",
+        "image": "images/aku.webp",
+        "fallbackImage": "images/aku.jpg",
+        "badge": "UPS & Ağır Vasıta",
         "desc": "Ağır vasıta, traktör, güneş enerjisi (GES), baz istasyonu UPS jel akü ve forklift aküleri alımı.",
         "items": [
             {"code": "aku_kuru", "name": "Kuru & Bakımsız UPS Akü Hurdası", "marketPrice": 35.88, "unit": "KG"},
@@ -150,8 +167,8 @@ BASE_MARKET_CATALOG = [
         "name": "Çinko Hurda Fiyatları",
         "shortName": "Hurda Çinko",
         "slug": "cinko-hurda-fiyatlari.html",
-        "image": "images/cinko-hurda-1.webp",
-        "fallbackImage": "images/cinko-hurda-1.jpg",
+        "image": "images/cinko.webp",
+        "fallbackImage": "images/cinko.jpg",
         "badge": "Levha & Külçe",
         "desc": "Çatı oluk sökümü çinko, zamak, külçe çinko ve galvaniz cüruf alımı.",
         "items": [
@@ -165,8 +182,8 @@ BASE_MARKET_CATALOG = [
         "name": "Kurşun Hurda Fiyatları",
         "shortName": "Hurda Kurşun",
         "slug": "kursun-hurda-fiyatlari.html",
-        "image": "images/kursun-hurda-1.webp",
-        "fallbackImage": "images/kursun-hurda-1.jpg",
+        "image": "images/kursun.webp",
+        "fallbackImage": "images/kursun.jpg",
         "badge": "Minare & Levha",
         "desc": "Cami kubbe ve minare söküm kurşunu, röntgen odası zırh kurşunu ve kurşun boru alımı.",
         "items": [
@@ -182,7 +199,7 @@ BASE_MARKET_CATALOG = [
         "slug": "nikel-hurda-fiyatlari.html",
         "image": "images/nikel-hurda.webp",
         "fallbackImage": "images/nikel-hurda.jpg",
-        "badge": "%99 Saf Anot",
+        "badge": "Saf Anot & Şablon",
         "desc": "Kaplama tesisleri anot nikel, şablon nikel, turbo nikel ve inconel alaşım alımı.",
         "items": [
             {"code": "nikel_anot", "name": "Nikel %99.9 Anot & Şablon Hurdası", "marketPrice": 516.03, "unit": "KG"},
@@ -195,12 +212,12 @@ BASE_MARKET_CATALOG = [
         "name": "Bronz & Kızıl Hurda Fiyatları",
         "shortName": "Bronz & Kızıl",
         "slug": "bronz-hurda-fiyatlari.html",
-        "image": "images/bronz-hurda-1.webp",
-        "fallbackImage": "images/bronz-hurda-1.jpg",
+        "image": "images/bronz.png.webp",
+        "fallbackImage": "images/bronz.png.jpg",
         "badge": "Fosfor Bronz & RG5",
         "desc": "Ağır sanayi dişli yatakları, burçlar, fosfor bronz, kızıl parça RG5 ve talaş alımı.",
         "items": [
-            {"code": "bronz_fosfor", "name": "Fosfor Bronz (kalaylı) Levha & Parça", "marketPrice": 582.06, "unit": "KG"},
+            {"code": "bronz_fosfor", "name": "Fosfor Bronz (Kalaylı) Levha & Parça", "marketPrice": 582.06, "unit": "KG"},
             {"code": "bronz_parca", "name": "Bronz Dişli, Burç & Yatak Parça", "marketPrice": 497.80, "unit": "KG"},
             {"code": "bronz_talas", "name": "Bronz Torna Talaşı", "marketPrice": 467.54, "unit": "KG"},
             {"code": "bronz_rg5", "name": "Kızıl Parça (RG5 / RG7 Vana & Burç)", "marketPrice": 330.26, "unit": "KG"}
@@ -211,8 +228,8 @@ BASE_MARKET_CATALOG = [
         "name": "Elektronik Kart Hurda Fiyatları",
         "shortName": "Elektronik Hurda",
         "slug": "elektronik-hurda-fiyatlari.html",
-        "image": "images/elektronik-hurda-1.webp",
-        "fallbackImage": "images/elektronik-hurda-1.jpg",
+        "image": "images/elektronik.png.webp",
+        "fallbackImage": "images/elektronik.png.jpg",
         "badge": "Anakart & Sunucu",
         "desc": "Bilgisayar anakartları, sunucu (server) sistemleri, telekom santral kartları, işlemci ve RAM hurdası alımı.",
         "items": [
@@ -227,9 +244,9 @@ BASE_MARKET_CATALOG = [
         "name": "Klima & Chiller Hurda Fiyatları",
         "shortName": "Klima & Chiller",
         "slug": "klima-hurda-fiyatlari.html",
-        "image": "images/klima-hurda-1.webp",
-        "fallbackImage": "images/klima-hurda-1.jpg",
-        "badge": "İklimlendirme Sökümü",
+        "image": "images/klima.png.webp",
+        "fallbackImage": "images/klima.png.jpg",
+        "badge": "Chiller & İklimlendirme",
         "desc": "Merkezi sistem chiller soğutma grupları, VRF üniteleri, split klimalar, kompresör ve bakır boru tesisatı alımı.",
         "items": [
             {"code": "klima_bakir_petek", "name": "Klima & Chiller Bakır/Alüminyum Radyatör", "marketPrice": 355.46, "unit": "KG"},
@@ -242,8 +259,8 @@ BASE_MARKET_CATALOG = [
         "name": "Plastik & PVC Hurda Fiyatları",
         "shortName": "Hurda Plastik",
         "slug": "plastik-hurda-fiyatlari.html",
-        "image": "images/plastik-hurda-1.webp",
-        "fallbackImage": "images/plastik-hurda-1.jpg",
+        "image": "images/plastik.webp",
+        "fallbackImage": "images/plastik.jpg",
         "badge": "Tarımsal & Sanayi",
         "desc": "Sulama boruları, şeffaf sera naylonu, polipropilen (moblen), ABS, PE varil ve PVC pimapen profil alımı.",
         "items": [
@@ -258,9 +275,9 @@ BASE_MARKET_CATALOG = [
         "name": "Kağıt & Karton Hurda Fiyatları",
         "shortName": "Kağıt & Karton",
         "slug": "kagit-hurda-fiyatlari.html",
-        "image": "images/kagit-hurda-1.webp",
-        "fallbackImage": "images/kagit-hurda-1.jpg",
-        "badge": "Tonajlı Pres Alım",
+        "image": "images/kagit.webp",
+        "fallbackImage": "images/kagit.jpg",
+        "badge": "Presli & Tonajlı",
         "desc": "Fabrika, matbaa, zincir market ve kurumlardan çıkan presli/dökme karton, 1. hamur beyaz kağıt ve arşiv imha hizmeti.",
         "items": [
             {"code": "kagit_gazete", "name": "Matbaa Artığı Baskısız / Temiz Kağıt", "marketPrice": 7.20, "unit": "KG"},
@@ -275,9 +292,8 @@ BASE_MARKET_CATALOG = [
 def fetch_live_exchange_and_scrape():
     usd_try = 34.85
     eur_try = 37.90
-    source_status = "LME + Piyasa Canlı Endeksi (%20 İskontolu)"
+    source_status = "LME + Piyasa Canlı Endeksi (%20 Net Kantar İskontolu)"
 
-    # 1. Fetch free USD/TRY & EUR/TRY rate from open.er-api.com
     try:
         req = urllib.request.Request(
             "https://open.er-api.com/v6/latest/USD",
@@ -292,7 +308,6 @@ def fetch_live_exchange_and_scrape():
     except Exception as e:
         print("Exchange API fallback used:", e)
 
-    # 2. Scrape live Turkish scrap reference table if reachable
     scraped_map = {}
     try:
         req = urllib.request.Request(
@@ -317,6 +332,74 @@ def fetch_live_exchange_and_scrape():
     return usd_try, eur_try, scraped_map, source_status
 
 
+def send_daily_price_email(payload):
+    load_local_env()
+    gmail_user = os.environ.get("GMAIL_USER", "bulganorhan19@gmail.com")
+    gmail_pass = os.environ.get("GMAIL_APP_PASSWORD", "").replace(" ", "")
+    if not gmail_pass:
+        print("GMAIL_APP_PASSWORD not set in environment; skipping email notification.")
+        return False
+
+    try:
+        msg = MIMEMultipart("alternative")
+        msg["Subject"] = f"Bulgan Hurdacılık — Günlük Hurda Fiyat Bülteni ({payload['updatedAt']})"
+        msg["From"] = f"Bulgan Hurdacılık Sistem <{gmail_user}>"
+        msg["To"] = gmail_user
+
+        rows_html = ""
+        for cat in payload["categories"][:8]:
+            first = cat["items"][0]
+            rows_html += (
+                f"<tr>"
+                f"<td style='padding:8px 12px;border-bottom:1px solid #e2e8f0;font-weight:600'>{cat['shortName']}</td>"
+                f"<td style='padding:8px 12px;border-bottom:1px solid #e2e8f0'>{first['name']}</td>"
+                f"<td style='padding:8px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;text-decoration:line-through'>{first['marketPrice']:.2f} TL</td>"
+                f"<td style='padding:8px 12px;border-bottom:1px solid #e2e8f0;font-weight:700;color:#15803d'>{first['price']:.2f} TL / KG</td>"
+                f"</tr>"
+            )
+
+        html_body = f"""
+        <div style="font-family:Segoe UI,Arial,sans-serif;max-width:680px;margin:0 auto;border:1px solid #cbd5e1;border-radius:8px;overflow:hidden">
+          <div style="background:#11151c;color:#ffffff;padding:20px 24px;border-bottom:3px solid #d4a52a">
+            <h2 style="margin:0;font-size:20px">BULGAN HURDACILIK & GERİ DÖNÜŞÜM</h2>
+            <p style="margin:4px 0 0;color:#cbd5e1;font-size:13px">Günlük Otomatik LME & Piyasa Kazıyıcı Raporu (-%20 Net Kantar Baz Fiyatları)</p>
+          </div>
+          <div style="padding:20px 24px;background:#ffffff;color:#1e293b">
+            <p style="margin:0 0 14px;font-size:14px">
+              <strong>Tarih / Saat:</strong> {payload['updatedAt']} &nbsp;|&nbsp;
+              <strong>USD/TRY:</strong> {payload['exchange']['USD_TRY']} TL &nbsp;|&nbsp;
+              <strong>EUR/TRY:</strong> {payload['exchange']['EUR_TRY']} TL
+            </p>
+            <table style="width:100%;border-collapse:collapse;font-size:13px">
+              <thead>
+                <tr style="background:#f1f5f9;text-align:left">
+                  <th style="padding:8px 12px">Grup</th>
+                  <th style="padding:8px 12px">Örnek Kalem</th>
+                  <th style="padding:8px 12px">Borsa</th>
+                  <th style="padding:8px 12px">Bulgan Net (-%20)</th>
+                </tr>
+              </thead>
+              <tbody>{rows_html}</tbody>
+            </table>
+            <p style="margin:18px 0 0;font-size:12px;color:#64748b">
+              Canlı tablo ve hesaplama aracı <a href="https://bulgangeridonusum.com.tr/hurda-fiyatlari.html">bulgangeridonusum.com.tr/hurda-fiyatlari.html</a> adresinde güncellenmiştir.
+            </p>
+          </div>
+        </div>
+        """
+        msg.attach(MIMEText(html_body, "html", "utf-8"))
+
+        ctx = ssl.create_default_context()
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ctx, timeout=15) as server:
+            server.login(gmail_user, gmail_pass)
+            server.sendmail(gmail_user, [gmail_user], msg.as_string())
+        print(f"Successfully sent daily price bulletin to {gmail_user}")
+        return True
+    except Exception as e:
+        print("Failed to send daily email:", e)
+        return False
+
+
 def build_prices_payload():
     usd_try, eur_try, scraped_map, source_status = fetch_live_exchange_and_scrape()
     tz_tr = timezone(timedelta(hours=3))
@@ -327,7 +410,6 @@ def build_prices_payload():
         items_out = []
         for item in cat["items"]:
             raw_market = item["marketPrice"]
-            # Check if live scraped map has matching item
             for s_key, s_val in scraped_map.items():
                 if item["name"].split("(")[0].strip().lower()[:14] in s_key:
                     raw_market = s_val
@@ -370,10 +452,9 @@ def build_prices_payload():
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
     print(f"Saved {len(categories_out)} categories to {out_path} (Updated: {payload['updatedAt']}, USD/TRY: {usd_try})")
-    # Print sample discounted prices
-    for c in categories_out[:4]:
-        first = c["items"][0]
-        print(f" - {c['shortName']} ({first['name']}): Borsa={first['marketPrice']} TL -> Net(-%20)={first['price']} TL/KG")
+
+    if "--notify-email" in sys.argv:
+        send_daily_price_email(payload)
 
 
 if __name__ == "__main__":
