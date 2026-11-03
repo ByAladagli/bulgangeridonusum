@@ -1,6 +1,6 @@
 /* ==========================================================================
    BULGAN HURDACILIK & GERİ DÖNÜŞÜM — İSTEMCİ UYGULAMA MOTORU
-   Canlı Borsa Veri Eşitleme (-%20 Net Kantar), Hesaplama Aracı & Form Doğrulama
+   Canlı Borsa Veri Eşitleme , Hesaplama Aracı & Form Doğrulama
    ========================================================================== */
 
 (function () {
@@ -171,7 +171,7 @@
           "Konum: " + sel.city + "\n" +
           "Hurda Listesi:\n" +
           lines.join("\n") +
-          "\nTahmini Net Kantar Tutarı (-%20 Baz): " + formatTL(grandTotal) +
+          "\nTahmini Net Kantar Tutarı: " + formatTL(grandTotal) +
           "\nYerinde tartım ve nakit alım için dönüş rica ederim.";
         waQuoteBtn.href = "https://wa.me/905459043834?text=" + encodeURIComponent(msg);
       }

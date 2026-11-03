@@ -35,7 +35,7 @@
   --danger-red: #b91c1c;
 
   /* Ölçüler & Tipografi */
-  --container-max: 1680px;
+  --container-max: 1720px;
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 8px;
@@ -1548,20 +1548,25 @@ table td,
   }
 }
 
-
 /* ==========================================================================
-   GENİŞ EKRAN, KENAR BOŞLUKLARI KALDIRMA & ESTETİK REVİZYON
+   BULGAN HURDACILIK — PREMIUM ENDÜSTRİYEL ARAYÜZ (PERFECT OVERHAUL)
    ========================================================================== */
 
-/* Sağ ve Sol Ölü Boşlukları Kaldır - Geniş Akıcı Düzen */
+/* 1. Geniş Akıcı Konteyner — Sağ/Sol Ölü Boşlukları Tamamen Kaldır */
 .container {
   width: 100% !important;
-  max-width: min(95vw, 1740px) !important;
+  max-width: 1600px !important;
   margin: 0 auto !important;
   padding: 0 32px !important;
 }
 
-/* Header, Topbar ve Ticker için Tam Genişlik (Kenar Boşluğu Sıfır) */
+@media (min-width: 1800px) {
+  .container {
+    max-width: 1720px !important;
+    padding: 0 48px !important;
+  }
+}
+
 .site-header .container,
 .topbar .container,
 .ticker-bar .container {
@@ -1569,49 +1574,126 @@ table td,
   padding: 0 32px !important;
 }
 
-/* Header 90px & Navigasyon Tek Satır */
+/* 2. Top Bar */
+.topbar {
+  background-color: #0d1015 !important;
+  border-bottom: 1px solid #232b36 !important;
+  font-size: 0.82rem !important;
+  padding: 6px 0 !important;
+}
+
+.topbar-inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+.topbar-left, .topbar-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+}
+
+/* 3. Header 90px & Navigasyon Tek Satır & Yatay Butonlar */
 .site-header {
-  background-color: rgba(16, 19, 24, 0.96) !important;
+  background-color: rgba(16, 19, 24, 0.98) !important;
   border-bottom: 2px solid #303945 !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  backdrop-filter: blur(12px) !important;
 }
 
 .header-inner {
   min-height: 90px !important;
-  gap: 24px !important;
+  height: 90px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+}
+
+.brand-logo {
+  display: inline-flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
 }
 
 .brand-logo img {
-  height: 64px !important;
-  max-width: 190px !important;
+  height: 60px !important;
+  max-width: 185px !important;
   width: auto !important;
   object-fit: contain !important;
 }
 
-.brand-title {
-  font-size: 1.25rem !important;
-  font-weight: 800 !important;
-  color: #ffffff !important;
-  white-space: nowrap !important;
+/* DESKTOP NAV */
+@media (min-width: 1025px) {
+  .main-nav {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    flex-shrink: 1 !important;
+  }
+  .mobile-menu-toggle {
+    display: none !important;
+  }
 }
 
-.brand-subtitle {
-  font-size: 0.72rem !important;
-  color: #D9A323 !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.08em !important;
-  white-space: nowrap !important;
-}
-
-.main-nav {
-  gap: 8px !important;
+/* MOBILE NAV */
+@media (max-width: 1024px) {
+  .header-inner {
+    height: 74px !important;
+    min-height: 74px !important;
+  }
+  .brand-logo img {
+    height: 48px !important;
+    max-width: 145px !important;
+  }
+  .main-nav {
+    display: none !important;
+    position: absolute !important;
+    top: 74px !important;
+    left: 0 !important;
+    right: 0 !important;
+    background-color: #171d26 !important;
+    border-bottom: 2px solid #303945 !important;
+    padding: 16px 20px !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6) !important;
+  }
+  .main-nav.open {
+    display: flex !important;
+  }
+  .mobile-menu-toggle {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    background-color: #1e2631 !important;
+    border: 1px solid #303945 !important;
+    color: #ffffff !important;
+    padding: 8px 14px !important;
+    border-radius: 6px !important;
+    font-size: 0.88rem !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+  }
+  .header-actions .header-wa-btn {
+    display: none !important;
+  }
 }
 
 .nav-link {
   white-space: nowrap !important;
-  font-size: 0.92rem !important;
-  padding: 10px 14px !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  padding: 8px 11px !important;
   color: #F5F5F5 !important;
   border-radius: 6px !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
 }
 
 .nav-link:hover, .nav-link.active {
@@ -1619,61 +1701,93 @@ table td,
   background-color: rgba(217, 163, 35, 0.08) !important;
 }
 
+.nav-dropdown {
+  position: relative !important;
+}
+
+.nav-dropdown-menu {
+  background-color: #171d26 !important;
+  border: 1px solid #303945 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5) !important;
+  min-width: 250px !important;
+}
+
 .header-actions {
   display: flex !important;
   align-items: center !important;
-  gap: 12px !important;
+  gap: 10px !important;
   flex-shrink: 0 !important;
 }
 
+/* YATAY KIRILMAYAN YEŞİL KANTAR BUTONU */
 .header-phone-btn {
   display: inline-flex !important;
+  flex-direction: row !important;
   align-items: center !important;
-  gap: 9px !important;
+  justify-content: center !important;
+  gap: 8px !important;
   background-color: #16A34A !important;
   color: #ffffff !important;
   font-weight: 700 !important;
-  font-size: 0.92rem !important;
-  padding: 12px 20px !important;
+  font-size: 0.9rem !important;
+  padding: 10px 18px !important;
   border-radius: 8px !important;
   white-space: nowrap !important;
   flex-shrink: 0 !important;
   box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35) !important;
   border: none !important;
+  height: 44px !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
 }
 
 .header-phone-btn:hover {
   background-color: #15803D !important;
+  color: #ffffff !important;
 }
 
+.header-phone-btn * {
+  white-space: nowrap !important;
+}
+
+/* YATAY WHATSAPP BUTONU */
 .header-wa-btn {
   display: inline-flex !important;
+  flex-direction: row !important;
   align-items: center !important;
+  justify-content: center !important;
   gap: 8px !important;
   background-color: #191F28 !important;
   border: 1px solid #303945 !important;
   color: #D9A323 !important;
   font-weight: 700 !important;
-  font-size: 0.92rem !important;
-  padding: 12px 18px !important;
+  font-size: 0.9rem !important;
+  padding: 10px 16px !important;
   border-radius: 8px !important;
   white-space: nowrap !important;
   flex-shrink: 0 !important;
+  height: 44px !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
 }
 
 .header-wa-btn:hover {
   border-color: #D9A323 !important;
   color: #ffffff !important;
+  background-color: #242c38 !important;
 }
 
-/* Canlı Ticker Bandı Hücreleri & %20 Kaldırma */
+/* 4. Canlı Ticker Bandı */
 .ticker-bar {
   background-color: #0B0E12 !important;
   border-bottom: 1px solid #303945 !important;
-  padding: 10px 0 !important;
+  padding: 8px 0 !important;
 }
 
 .ticker-inner {
+  display: flex !important;
+  align-items: center !important;
   gap: 12px !important;
 }
 
@@ -1681,12 +1795,26 @@ table td,
   background-color: #D9A323 !important;
   color: #101318 !important;
   font-weight: 800 !important;
-  font-size: 0.78rem !important;
-  padding: 6px 14px !important;
+  font-size: 0.76rem !important;
+  padding: 6px 12px !important;
   border-radius: 6px !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.04em !important;
+  white-space: nowrap !important;
   flex-shrink: 0 !important;
+  letter-spacing: 0.05em !important;
+}
+
+.ticker-cells {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  overflow-x: auto !important;
+  white-space: nowrap !important;
+  scrollbar-width: none !important;
+  flex-grow: 1 !important;
+}
+
+.ticker-cells::-webkit-scrollbar {
+  display: none !important;
 }
 
 .ticker-item {
@@ -1695,132 +1823,585 @@ table td,
   gap: 8px !important;
   background-color: #191F28 !important;
   border: 1px solid #303945 !important;
-  border-radius: 6px !important;
   padding: 6px 14px !important;
-  font-size: 0.88rem !important;
+  border-radius: 6px !important;
+  text-decoration: none !important;
   flex-shrink: 0 !important;
+  transition: border-color 0.2s ease !important;
+}
+
+.ticker-item:hover {
+  border-color: #D9A323 !important;
+}
+
+.ticker-item-name {
+  color: #A6AFBA !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+}
+
+.ticker-new {
+  color: #16A34A !important;
+  font-weight: 800 !important;
+  font-size: 0.95rem !important;
+  font-family: var(--font-mono) !important;
 }
 
 .ticker-old {
   display: none !important;
 }
 
-.ticker-name {
-  color: #A6AFBA !important;
-  font-weight: 600 !important;
-}
-
-.ticker-price {
-  color: #16A34A !important;
-  font-family: var(--font-mono) !important;
-  font-weight: 800 !important;
-  font-size: 0.95rem !important;
-}
-
-/* Hero Section */
+/* 5. Hero Karşılama Alanı */
 .hero-section {
-  background-color: #101318 !important;
-  padding: 56px 0 64px !important;
-  border-bottom: 1px solid #303945 !important;
+  padding: 44px 0 54px !important;
+  background: radial-gradient(ellipse at 85% 20%, rgba(217, 163, 35, 0.06) 0%, transparent 55%),
+              linear-gradient(180deg, rgba(16, 19, 24, 0.92) 0%, rgba(16, 19, 24, 0.98) 100%),
+              url('/images/bakir.webp') center/cover no-repeat !important;
+  position: relative !important;
 }
 
 .hero-grid {
-  grid-template-columns: 1.15fr 0.85fr !important;
-  gap: 56px !important;
+  display: grid !important;
+  grid-template-columns: 1.25fr 1fr !important;
+  gap: 40px !important;
   align-items: start !important;
 }
 
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.hero-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  color: #D9A323 !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  margin-bottom: 14px !important;
+}
+
 .hero-title {
-  font-size: clamp(2.1rem, 3.2vw, 3rem) !important;
+  font-size: clamp(2rem, 3vw, 2.75rem) !important;
   font-weight: 800 !important;
   color: #ffffff !important;
-  line-height: 1.2 !important;
+  line-height: 1.22 !important;
   letter-spacing: -0.025em !important;
-  margin-bottom: 20px !important;
+  margin-bottom: 18px !important;
 }
 
 .hero-title .title-l1 {
-  display: block;
-  color: #ffffff;
+  display: block !important;
+  color: #ffffff !important;
 }
 
 .hero-title .title-l2 {
-  display: block;
-  color: #D9A323;
+  display: block !important;
+  color: #D9A323 !important;
 }
 
 .hero-title .title-l3 {
-  display: block;
-  color: #A6AFBA;
-  font-size: 0.68em;
-  font-weight: 600;
-  margin-top: 6px;
+  display: block !important;
+  color: #A6AFBA !important;
+  font-size: 0.65em !important;
+  font-weight: 600 !important;
+  margin-top: 6px !important;
 }
 
 .hero-lead {
-  font-size: 1.05rem !important;
+  font-size: 1.02rem !important;
   color: #A6AFBA !important;
-  line-height: 1.65 !important;
-  margin-bottom: 28px !important;
-  max-width: 620px !important;
+  line-height: 1.6 !important;
+  margin-bottom: 24px !important;
+  max-width: 600px !important;
 }
 
-/* Hesaplama Paneli */
+.hero-cta-group {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+  margin-bottom: 28px !important;
+}
+
+.hero-cta-group .btn {
+  height: 48px !important;
+  padding: 0 20px !important;
+  border-radius: 8px !important;
+  font-size: 0.95rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+}
+
+.btn-primary {
+  background-color: #16A34A !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35) !important;
+}
+
+.btn-primary:hover {
+  background-color: #15803D !important;
+  color: #ffffff !important;
+}
+
+.btn-gold {
+  background-color: #D9A323 !important;
+  color: #101318 !important;
+  font-weight: 800 !important;
+  border: none !important;
+}
+
+.btn-gold:hover {
+  background-color: #c4911c !important;
+}
+
+.btn-outline-light {
+  background-color: transparent !important;
+  border: 1px solid #303945 !important;
+  color: #F5F5F5 !important;
+}
+
+.btn-outline-light:hover {
+  border-color: #D9A323 !important;
+  color: #D9A323 !important;
+}
+
+.hero-specs {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 16px !important;
+  margin-top: 20px !important;
+  padding-top: 20px !important;
+  border-top: 1px solid #242c38 !important;
+}
+
+@media (max-width: 768px) {
+  .hero-specs {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.hero-spec-title {
+  font-size: 0.86rem !important;
+  font-weight: 700 !important;
+  color: #D9A323 !important;
+  margin-bottom: 4px !important;
+}
+
+.hero-spec-desc {
+  font-size: 0.78rem !important;
+  color: #A6AFBA !important;
+  line-height: 1.45 !important;
+}
+
+/* 6. Finansal Hesaplama Paneli */
 .calc-panel {
   background-color: #191F28 !important;
   border: 1px solid #303945 !important;
-  border-radius: 14px !important;
-  padding: 28px !important;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45) !important;
+  border-radius: 12px !important;
+  padding: 24px 26px !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5) !important;
 }
 
-.calc-output-total {
-  font-size: 1.85rem !important;
+.calc-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  margin-bottom: 18px !important;
+}
+
+.calc-title {
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+}
+
+.calc-subtitle {
+  font-size: 0.8rem !important;
+  color: #A6AFBA !important;
+  margin-top: 3px !important;
+}
+
+.calc-badge {
+  background-color: rgba(22, 163, 74, 0.15) !important;
+  border: 1px solid #16A34A !important;
+  color: #16A34A !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  padding: 3px 8px !important;
+  border-radius: 9999px !important;
+  white-space: nowrap !important;
+}
+
+.calc-panel .form-group {
+  margin-bottom: 12px !important;
+}
+
+.calc-panel .form-label {
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  color: #A6AFBA !important;
+  margin-bottom: 5px !important;
+  display: block !important;
+}
+
+.calc-panel .form-control {
+  background-color: #10141b !important;
+  border: 1px solid #303945 !important;
+  color: #ffffff !important;
+  border-radius: 6px !important;
+  padding: 9px 12px !important;
+  font-size: 0.9rem !important;
+  width: 100% !important;
+}
+
+.calc-row-2 {
+  display: grid !important;
+  grid-template-columns: 1.6fr 1fr !important;
+  gap: 12px !important;
+  margin-bottom: 12px !important;
+}
+
+.calc-result-box {
+  background-color: #10141b !important;
+  border: 1px solid #303945 !important;
+  border-radius: 8px !important;
+  padding: 14px 18px !important;
+  margin: 16px 0 !important;
+}
+
+.calc-result-grid {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.calc-stat-label {
+  font-size: 0.78rem !important;
+  color: #A6AFBA !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  margin-bottom: 2px !important;
+  display: block !important;
+}
+
+.calc-total-val {
+  font-size: 1.9rem !important;
   font-weight: 900 !important;
   color: #D9A323 !important;
   font-family: var(--font-mono) !important;
 }
 
-/* 4 Kolonlu Geniş Footer */
+.calc-btn-group {
+  display: flex !important;
+  gap: 10px !important;
+  align-items: center !important;
+}
+
+.calc-btn-group .btn {
+  height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+}
+
+/* Section Header Center */
+.section-header.text-center {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  justify-content: center !important;
+  border-bottom: 2px solid var(--border-light) !important;
+  padding-bottom: 20px !important;
+  margin-bottom: 36px !important;
+}
+
+.section-header.text-center .section-tag {
+  display: inline-block !important;
+  margin-bottom: 8px !important;
+}
+
+.section-header.text-center .section-title {
+  text-align: center !important;
+}
+
+.section-header.text-center .section-desc {
+  max-width: 680px !important;
+  text-align: center !important;
+  margin: 8px auto 0 !important;
+}
+
+/* 7. 6 Temel Metal Kartları */
+.metal-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 24px !important;
+  margin-top: 32px !important;
+}
+
+@media (max-width: 1100px) {
+  .metal-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .metal-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.metal-card {
+  background-color: #ffffff !important;
+  border: 1px solid #d5dce6 !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.metal-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12) !important;
+}
+
+.metal-card-img {
+  position: relative !important;
+  height: 180px !important;
+  background-color: #1e2631 !important;
+}
+
+.metal-card-img img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.metal-price-badge {
+  position: absolute !important;
+  bottom: 12px !important;
+  right: 12px !important;
+  background-color: rgba(16, 19, 24, 0.92) !important;
+  border: 1px solid #D9A323 !important;
+  color: #D9A323 !important;
+  font-weight: 800 !important;
+  font-size: 0.95rem !important;
+  padding: 5px 12px !important;
+  border-radius: 6px !important;
+  font-family: var(--font-mono) !important;
+}
+
+.metal-card-body {
+  padding: 20px !important;
+  flex-grow: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+.metal-card-title {
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+  color: #0f172a !important;
+  margin-bottom: 8px !important;
+}
+
+.metal-card-desc {
+  font-size: 0.88rem !important;
+  color: #526075 !important;
+  line-height: 1.5 !important;
+  margin-bottom: 16px !important;
+}
+
+.metal-card-actions {
+  display: flex !important;
+  gap: 10px !important;
+  align-items: center !important;
+}
+
+.metal-card-actions .btn {
+  flex: 1 !important;
+  height: 38px !important;
+  font-size: 0.85rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+}
+
+.btn-outline-dark {
+  border: 1px solid #cbd5e1 !important;
+  color: #334155 !important;
+  background-color: #f8fafc !important;
+}
+
+.btn-outline-dark:hover {
+  border-color: #0f172a !important;
+  color: #0f172a !important;
+}
+
+/* Detaylı Fiyat CTA Banner */
+.price-banner-cta {
+  margin-top: 48px !important;
+  background-color: #191F28 !important;
+  border: 1px solid #303945 !important;
+  border-radius: 12px !important;
+  padding: 28px 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 24px !important;
+  flex-wrap: wrap !important;
+}
+
+.price-banner-cta h3 {
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  margin-bottom: 6px !important;
+}
+
+.price-banner-cta p {
+  font-size: 0.92rem !important;
+  color: #A6AFBA !important;
+}
+
+/* 8. Kurumsal 4 Kolonlu Geniş Footer */
 .site-footer {
   background-color: #0B0E13 !important;
   border-top: 3px solid #D9A323 !important;
-  padding: 65px 0 0 !important;
+  padding: 60px 0 0 !important;
   color: #A6AFBA !important;
 }
 
 .footer-grid {
   display: grid !important;
-  grid-template-columns: 1.4fr 1fr 1fr 1fr !important;
-  gap: 48px !important;
-  padding-bottom: 50px !important;
-  border-bottom: 1px solid #303945 !important;
+  grid-template-columns: 1.35fr 1fr 1fr 1fr !important;
+  gap: 40px !important;
+  padding-bottom: 48px !important;
+  border-bottom: 1px solid #232b36 !important;
 }
 
-.footer-col h3, .footer-col h4, .footer-heading {
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.footer-col .footer-logo img {
+  height: 64px !important;
+  width: auto !important;
+  max-width: 190px !important;
+  margin-bottom: 14px !important;
+  object-fit: contain !important;
+}
+
+.footer-bio {
+  font-size: 0.85rem !important;
+  line-height: 1.55 !important;
+  color: #8c97a5 !important;
+  margin-bottom: 18px !important;
+}
+
+.footer-heading {
   font-size: 1.05rem !important;
   font-weight: 700 !important;
   color: #D9A323 !important;
-  margin-bottom: 20px !important;
+  margin-bottom: 18px !important;
   white-space: nowrap !important;
 }
 
-.footer-col ul li a {
+.footer-contact-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.footer-contact-list li {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+  margin-bottom: 10px !important;
+  font-size: 0.85rem !important;
+}
+
+.footer-contact-list li svg {
+  color: #D9A323 !important;
+  flex-shrink: 0 !important;
+  margin-top: 3px !important;
+}
+
+.footer-contact-list a {
+  color: #e2e8f0 !important;
+  text-decoration: none !important;
+}
+
+.footer-contact-list a:hover {
+  color: #D9A323 !important;
+}
+
+.footer-price-list, .footer-links {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.footer-price-list li a, .footer-links li a {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  color: #A6AFBA !important;
-  padding: 5px 0 !important;
+  color: #8c97a5 !important;
+  font-size: 0.85rem !important;
+  padding: 4px 0 !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
 }
 
-.footer-col ul li a:hover {
+.footer-price-list li a:hover, .footer-links li a:hover {
   color: #D9A323 !important;
   transform: translateX(3px) !important;
 }
 
 .footer-price-tag {
-  font-family: var(--font-mono) !important;
-  font-weight: 700 !important;
   color: #16A34A !important;
-  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.86rem !important;
+}
+
+.footer-bottom {
+  padding: 20px 0 !important;
+  font-size: 0.8rem !important;
+  color: #64748b !important;
+}
+
+.footer-bottom-inner {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
 }

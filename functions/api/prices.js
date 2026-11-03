@@ -282,9 +282,7 @@ export async function onRequestGet(context) {
   const body = JSON.stringify({
     updatedAt: `${dd}.${mm}.${yyyy} ${hh}:${min}`,
     dateIso: `${yyyy}-${mm}-${dd}`,
-    discountApplied: "-%20 (Borsa Baz Fiyatından %20 Azaltılmış Net Alım Fiyatı)",
-    discountFactor: DISCOUNT_FACTOR,
-    exchange: { USD_TRY: usdTry, EUR_TRY: eurTry },
+            exchange: { USD_TRY: usdTry, EUR_TRY: eurTry },
     categories
   });
 
