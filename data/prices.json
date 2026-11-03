@@ -5,7 +5,7 @@
     "USD_TRY": 49.99,
     "EUR_TRY": 55.96
   },
-  "source": "LME + Piyasa Canlı Endeksi (%20 Net Kantar İskontolu)",
+  "source": "LME Londra Metal Borsası & Türkiye Serbest Piyasa Canlı Kantar Endeksi",
   "categories": [
     {
       "id": "bakir",
