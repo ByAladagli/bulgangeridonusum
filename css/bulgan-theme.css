@@ -35,7 +35,7 @@
   --danger-red: #b91c1c;
 
   /* Ölçüler & Tipografi */
-  --container-max: 1240px;
+  --container-max: 1680px;
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 8px;
@@ -1546,4 +1546,281 @@ table td,
     bottom: 74px;
     max-width: none;
   }
+}
+
+
+/* ==========================================================================
+   GENİŞ EKRAN, KENAR BOŞLUKLARI KALDIRMA & ESTETİK REVİZYON
+   ========================================================================== */
+
+/* Sağ ve Sol Ölü Boşlukları Kaldır - Geniş Akıcı Düzen */
+.container {
+  width: 100% !important;
+  max-width: min(95vw, 1740px) !important;
+  margin: 0 auto !important;
+  padding: 0 32px !important;
+}
+
+/* Header, Topbar ve Ticker için Tam Genişlik (Kenar Boşluğu Sıfır) */
+.site-header .container,
+.topbar .container,
+.ticker-bar .container {
+  max-width: 100% !important;
+  padding: 0 32px !important;
+}
+
+/* Header 90px & Navigasyon Tek Satır */
+.site-header {
+  background-color: rgba(16, 19, 24, 0.96) !important;
+  border-bottom: 2px solid #303945 !important;
+}
+
+.header-inner {
+  min-height: 90px !important;
+  gap: 24px !important;
+}
+
+.brand-logo img {
+  height: 64px !important;
+  max-width: 190px !important;
+  width: auto !important;
+  object-fit: contain !important;
+}
+
+.brand-title {
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  white-space: nowrap !important;
+}
+
+.brand-subtitle {
+  font-size: 0.72rem !important;
+  color: #D9A323 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  white-space: nowrap !important;
+}
+
+.main-nav {
+  gap: 8px !important;
+}
+
+.nav-link {
+  white-space: nowrap !important;
+  font-size: 0.92rem !important;
+  padding: 10px 14px !important;
+  color: #F5F5F5 !important;
+  border-radius: 6px !important;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #D9A323 !important;
+  background-color: rgba(217, 163, 35, 0.08) !important;
+}
+
+.header-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-shrink: 0 !important;
+}
+
+.header-phone-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  background-color: #16A34A !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 0.92rem !important;
+  padding: 12px 20px !important;
+  border-radius: 8px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35) !important;
+  border: none !important;
+}
+
+.header-phone-btn:hover {
+  background-color: #15803D !important;
+}
+
+.header-wa-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background-color: #191F28 !important;
+  border: 1px solid #303945 !important;
+  color: #D9A323 !important;
+  font-weight: 700 !important;
+  font-size: 0.92rem !important;
+  padding: 12px 18px !important;
+  border-radius: 8px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+.header-wa-btn:hover {
+  border-color: #D9A323 !important;
+  color: #ffffff !important;
+}
+
+/* Canlı Ticker Bandı Hücreleri & %20 Kaldırma */
+.ticker-bar {
+  background-color: #0B0E12 !important;
+  border-bottom: 1px solid #303945 !important;
+  padding: 10px 0 !important;
+}
+
+.ticker-inner {
+  gap: 12px !important;
+}
+
+.ticker-label {
+  background-color: #D9A323 !important;
+  color: #101318 !important;
+  font-weight: 800 !important;
+  font-size: 0.78rem !important;
+  padding: 6px 14px !important;
+  border-radius: 6px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  flex-shrink: 0 !important;
+}
+
+.ticker-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background-color: #191F28 !important;
+  border: 1px solid #303945 !important;
+  border-radius: 6px !important;
+  padding: 6px 14px !important;
+  font-size: 0.88rem !important;
+  flex-shrink: 0 !important;
+}
+
+.ticker-old {
+  display: none !important;
+}
+
+.ticker-name {
+  color: #A6AFBA !important;
+  font-weight: 600 !important;
+}
+
+.ticker-price {
+  color: #16A34A !important;
+  font-family: var(--font-mono) !important;
+  font-weight: 800 !important;
+  font-size: 0.95rem !important;
+}
+
+/* Hero Section */
+.hero-section {
+  background-color: #101318 !important;
+  padding: 56px 0 64px !important;
+  border-bottom: 1px solid #303945 !important;
+}
+
+.hero-grid {
+  grid-template-columns: 1.15fr 0.85fr !important;
+  gap: 56px !important;
+  align-items: start !important;
+}
+
+.hero-title {
+  font-size: clamp(2.1rem, 3.2vw, 3rem) !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.025em !important;
+  margin-bottom: 20px !important;
+}
+
+.hero-title .title-l1 {
+  display: block;
+  color: #ffffff;
+}
+
+.hero-title .title-l2 {
+  display: block;
+  color: #D9A323;
+}
+
+.hero-title .title-l3 {
+  display: block;
+  color: #A6AFBA;
+  font-size: 0.68em;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.hero-lead {
+  font-size: 1.05rem !important;
+  color: #A6AFBA !important;
+  line-height: 1.65 !important;
+  margin-bottom: 28px !important;
+  max-width: 620px !important;
+}
+
+/* Hesaplama Paneli */
+.calc-panel {
+  background-color: #191F28 !important;
+  border: 1px solid #303945 !important;
+  border-radius: 14px !important;
+  padding: 28px !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45) !important;
+}
+
+.calc-output-total {
+  font-size: 1.85rem !important;
+  font-weight: 900 !important;
+  color: #D9A323 !important;
+  font-family: var(--font-mono) !important;
+}
+
+/* 4 Kolonlu Geniş Footer */
+.site-footer {
+  background-color: #0B0E13 !important;
+  border-top: 3px solid #D9A323 !important;
+  padding: 65px 0 0 !important;
+  color: #A6AFBA !important;
+}
+
+.footer-grid {
+  display: grid !important;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr !important;
+  gap: 48px !important;
+  padding-bottom: 50px !important;
+  border-bottom: 1px solid #303945 !important;
+}
+
+.footer-col h3, .footer-col h4, .footer-heading {
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: #D9A323 !important;
+  margin-bottom: 20px !important;
+  white-space: nowrap !important;
+}
+
+.footer-col ul li a {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  color: #A6AFBA !important;
+  padding: 5px 0 !important;
+}
+
+.footer-col ul li a:hover {
+  color: #D9A323 !important;
+  transform: translateX(3px) !important;
+}
+
+.footer-price-tag {
+  font-family: var(--font-mono) !important;
+  font-weight: 700 !important;
+  color: #16A34A !important;
+  font-size: 0.88rem !important;
 }
