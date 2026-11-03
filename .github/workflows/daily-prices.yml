@@ -1,0 +1,37 @@
+name: Günlük Borsa Hurda Fiyat Kazıyıcı (%20 İndirimli)
+
+on:
+  schedule:
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-prices:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repo Klonla
+        uses: actions/checkout@v4
+
+      - name: Python Kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Borsa Hurda Fiyatlarını Çek ve %20 Azaltma Uygula
+        run: |
+          python -c "
+          import scraper_daily_prices
+          scraper_daily_prices.ROOT = '.'
+          scraper_daily_prices.DATA_DIR = './data'
+          scraper_daily_prices.build_prices_payload()
+          "
+
+      - name: Güncel Fiyatları Kaydet
+        run: |
+          git config user.name "Bulgan Hurdacılık Bot"
+          git config user.email "bulganorhan19@gmail.com"
+          git add data/prices.json
+          git diff --staged --quiet || (git commit -m "chore(prices): günlük borsa hurda fiyatları güncellendi (-%20)" && git push)

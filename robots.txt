@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
+Disallow: /tesekkurler.html
 
 Sitemap: https://bulgangeridonusum.com.tr/sitemap.xml
