@@ -64,9 +64,21 @@ body.bulgan-exact-layout {
 
 .container {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1640px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 40px;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
 }
 
 a {
@@ -301,16 +313,18 @@ button, input, select, textarea {
 }
 
 .header-phone-box {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(0, 200, 117, 0.1);
-  border: 1px solid rgba(0, 200, 117, 0.3);
-  padding: 7px 12px;
+  gap: 10px;
+  background: rgba(0, 200, 117, 0.08);
+  border: 1px solid rgba(0, 200, 117, 0.25);
+  padding: 8px 14px;
   border-radius: var(--radius-sm);
   color: var(--brand-green);
   font-weight: 700;
   transition: all 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .header-phone-box:hover {
@@ -322,18 +336,31 @@ button, input, select, textarea {
 .header-phone-meta {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  gap: 2px;
 }
 
 .phone-num {
-  font-size: 0.88rem;
-  line-height: 1.1;
+  font-size: 0.92rem;
+  line-height: 1.25;
   font-family: var(--font-mono);
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.header-phone-box:hover .phone-num {
+  color: #000000;
 }
 
 .phone-lbl {
-  font-size: 0.68rem;
-  color: var(--text-muted);
-  font-weight: 500;
+  font-size: 0.72rem;
+  color: var(--brand-green);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.header-phone-box:hover .phone-lbl {
+  color: #101B18;
 }
 
 .header-phone-box:hover .phone-lbl {
@@ -501,7 +528,7 @@ button, input, select, textarea {
 }
 
 .hero-content-wrap {
-  max-width: 860px;
+  max-width: 1200px;
   margin: 0 auto;
   text-align: center;
 }
@@ -649,7 +676,7 @@ button, input, select, textarea {
   border-radius: var(--radius-lg);
   padding: 28px;
   box-shadow: var(--shadow-card);
-  max-width: 860px;
+  max-width: 1280px;
   margin: 0 auto;
 }
 
@@ -721,52 +748,62 @@ button, input, select, textarea {
 
 /* Calculation Result Box */
 .calc-result-box {
-  background: #08110D;
+  background: #060E0A;
   border: 1px solid rgba(0, 200, 117, 0.25);
   border-radius: var(--radius-md);
-  padding: 18px 22px;
+  padding: 20px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 18px;
-  flex-wrap: wrap;
-  gap: 14px;
+  margin-bottom: 20px;
+  gap: 20px;
 }
 
 .calc-rate-info {
   display: flex;
   flex-direction: column;
+  gap: 4px;
 }
 
 .calc-rate-lbl {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
+  line-height: 1.3;
 }
 
 .calc-rate-val {
   font-family: var(--font-mono);
-  font-size: 1.05rem;
-  font-weight: 700;
+  font-size: 1.15rem;
+  font-weight: 800;
   color: var(--brand-green);
+  line-height: 1.25;
 }
 
 .calc-total-info {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
   text-align: right;
 }
 
 .calc-total-lbl {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: var(--brand-gold);
-  font-weight: 600;
+  font-weight: 700;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .calc-total-val {
   font-family: var(--font-mono);
-  font-size: clamp(1.5rem, 4vw, 1.95rem);
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
   font-weight: 800;
   color: var(--brand-gold);
+  line-height: 1.25;
+  white-space: nowrap;
+  letter-spacing: -0.5px;
 }
 
 .btn-calc-wa {
@@ -1030,7 +1067,7 @@ button, input, select, textarea {
   border: 1px solid var(--border-card);
   border-radius: var(--radius-lg);
   padding: 28px;
-  max-width: 960px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -1098,7 +1135,7 @@ button, input, select, textarea {
   border: 1px solid var(--border-card);
   border-radius: var(--radius-lg);
   padding: 30px;
-  max-width: 760px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -1278,7 +1315,7 @@ button, input, select, textarea {
 }
 
 .search-box-wrap {
-  max-width: 680px;
+  max-width: 900px;
   margin: 0 auto 24px;
   position: relative;
 }
