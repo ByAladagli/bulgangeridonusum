@@ -1536,3 +1536,11 @@ button, input, select, textarea {
     padding-bottom: 60px;
   }
 }
+
+
+/* UI Vector Icon Styling */
+.ui-icon {
+  display: inline-block;
+  vertical-align: -2px;
+  flex-shrink: 0;
+}
