@@ -1821,7 +1821,7 @@ button, input, select, textarea {
   color: var(--text-dim) !important;
   font-family: var(--font-mono);
   font-size: 0.88rem;
-  text-decoration: line-through;
+  /* text-decoration removed */
 }
 
 .price-table .col-net {
@@ -2144,4 +2144,53 @@ button[type="submit"]:hover {
   gap: 10px;
   padding-top: 16px;
   border-top: 1px solid var(--border-card);
+}
+
+
+/* ==========================================================================
+   GLOBAL SVG SIZE SHIELD (PREVENTS ANY UNCONSTRAINED SVG BLOWOUT)
+   ========================================================================== */
+svg {
+  box-sizing: border-box;
+}
+
+.contact-sheet svg,
+.btn svg,
+button svg,
+form svg,
+.btn-outline-dark svg,
+.btn-primary svg,
+.btn-primary-glow svg,
+.btn-secondary-dark svg,
+.sidebar-box svg,
+.hero-calc-cta svg {
+  width: 18px !important;
+  height: 18px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
+.btn-outline-dark {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background: #131d27 !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  padding: 12px 20px !important;
+  border-radius: var(--radius-sm, 8px) !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.btn-outline-dark:hover {
+  background: #1c2b38 !important;
+  border-color: #25D366 !important;
+  color: #25D366 !important;
 }
