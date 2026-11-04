@@ -10,22 +10,35 @@
 - **Çalışma Saatleri:** Haftanın 7 günü 07:30 - 21:00
 - **Ödeme Yöntemi:** Dijital kantar tartımı sonrası araç başında anında Nakit, FAST veya EFT.
 
-## Güncel Hurda Fiyatları (03.11.2026 20:08 — Güncel Borsa Net Kantar Alım Fiyatları)
-- [Bakır Hurda Fiyatları](https://bulgangeridonusum.com.tr/bakir-hurda-fiyatlari.html): Soyma Bakır Hurdası (%99.9 Saf) = 549.38 TL/KG (Borsa Referans: 686.73 TL/KG)
-- [Kablo Hurda Fiyatları](https://bulgangeridonusum.com.tr/kablo-hurda-fiyatlari.html): Dalgıç Pompa & Tek Damar Kalın Kablo = 432.10 TL/KG (Borsa Referans: 540.13 TL/KG)
-- [Demir Hurda Fiyatları](https://bulgangeridonusum.com.tr/demir-hurda-fiyatlari.html): Ekstra Ağır Demir & Profil Hurdası = 12.62 TL/KG (Borsa Referans: 15.77 TL/KG)
-- [Alüminyum Hurda Fiyatları](https://bulgangeridonusum.com.tr/aluminyum-hurda-fiyatlari.html): Bakırlı Alüminyum Klima Radyatörü = 284.26 TL/KG (Borsa Referans: 355.33 TL/KG)
-- [Sarı Pirinç Hurda Fiyatları](https://bulgangeridonusum.com.tr/sari-hurda-fiyatlari.html): Araiş Sarı Hurdası (MS-64 / MS-70) = 287.01 TL/KG (Borsa Referans: 358.76 TL/KG)
-- [Paslanmaz Krom Hurda Fiyatları](https://bulgangeridonusum.com.tr/paslanmaz-hurda-fiyatlari.html): 310 Kalite Ateşe Dayanıklı Paslanmaz Krom = 96.40 TL/KG (Borsa Referans: 120.50 TL/KG)
-- [Akü Hurda Fiyatları](https://bulgangeridonusum.com.tr/aku-hurda-fiyatlari.html): Kuru & Bakımsız UPS Akü Hurdası = 28.70 TL/KG (Borsa Referans: 35.88 TL/KG)
-- [Çinko Hurda Fiyatları](https://bulgangeridonusum.com.tr/cinko-hurda-fiyatlari.html): Çinko Çatı & Oluk Söküm Hurdası = 84.12 TL/KG (Borsa Referans: 105.15 TL/KG)
-- [Kurşun Hurda Fiyatları](https://bulgangeridonusum.com.tr/kursun-hurda-fiyatlari.html): Soyma & Kırkambar Yumuşak Kurşun = 78.55 TL/KG (Borsa Referans: 98.19 TL/KG)
-- [Nikel Hurda Fiyatları](https://bulgangeridonusum.com.tr/nikel-hurda-fiyatlari.html): Nikel %99.9 Anot & Şablon Hurdası = 412.82 TL/KG (Borsa Referans: 516.03 TL/KG)
-- [Bronz & Kızıl Hurda Fiyatları](https://bulgangeridonusum.com.tr/bronz-hurda-fiyatlari.html): Fosfor Bronz (Kalaylı) Levha & Parça = 465.93 TL/KG (Borsa Referans: 582.41 TL/KG)
-- [Elektronik Kart Hurda Fiyatları](https://bulgangeridonusum.com.tr/elektronik-hurda-fiyatlari.html): RAM, İşlemci & Telekom Santral Kartları = 104.38 TL/KG (Borsa Referans: 130.48 TL/KG)
-- [Klima & Chiller Hurda Fiyatları](https://bulgangeridonusum.com.tr/klima-hurda-fiyatlari.html): Klima & Chiller Bakır/Alüminyum Radyatör = 284.37 TL/KG (Borsa Referans: 355.46 TL/KG)
-- [Plastik & PVC Hurda Fiyatları](https://bulgangeridonusum.com.tr/plastik-hurda-fiyatlari.html): Beyaz Şeffaf Naylon & Sera Örtüsü = 15.75 TL/KG (Borsa Referans: 19.69 TL/KG)
-- [Kağıt & Karton Hurda Fiyatları](https://bulgangeridonusum.com.tr/kagit-hurda-fiyatlari.html): Matbaa Artığı Baskısız / Temiz Kağıt = 5.76 TL/KG (Borsa Referans: 7.20 TL/KG)
+## Güncel Hurda Fiyatları (2026 Güncel Net Kantar Alım Fiyatları)
+- [Bakır Hurda Fiyatları](https://bulgangeridonusum.com.tr/bakir-hurda-fiyatlari.html): Soyma Bakır Hurdası (%99.9 Saf) = 549.38 TL/KG
+- [Kablo Hurda Fiyatları](https://bulgangeridonusum.com.tr/kablo-hurda-fiyatlari.html): Dalgıç Pompa & Tek Damar Kalın Kablo = 432.10 TL/KG
+- [Demir Hurda Fiyatları](https://bulgangeridonusum.com.tr/demir-hurda-fiyatlari.html): Ekstra Ağır Demir & Profil Hurdası = 12.62 TL/KG
+- [Alüminyum Hurda Fiyatları](https://bulgangeridonusum.com.tr/aluminyum-hurda-fiyatlari.html): Bakırlı Alüminyum Klima Radyatörü = 284.26 TL/KG
+- [Sarı Pirinç Hurda Fiyatları](https://bulgangeridonusum.com.tr/sari-hurda-fiyatlari.html): Araiş Sarı Hurdası (MS-64 / MS-70) = 287.01 TL/KG
+- [Paslanmaz Krom Hurda Fiyatları](https://bulgangeridonusum.com.tr/paslanmaz-hurda-fiyatlari.html): 310 Kalite Ateşe Dayanıklı Paslanmaz Krom = 96.40 TL/KG
+- [Akü Hurda Fiyatları](https://bulgangeridonusum.com.tr/aku-hurda-fiyatlari.html): Kuru & Bakımsız UPS Akü Hurdası = 28.70 TL/KG
+- [Çinko Hurda Fiyatları](https://bulgangeridonusum.com.tr/cinko-hurda-fiyatlari.html): Çinko Çatı & Oluk Söküm Hurdası = 84.12 TL/KG
+- [Kurşun Hurda Fiyatları](https://bulgangeridonusum.com.tr/kursun-hurda-fiyatlari.html): Soyma & Kırkambar Yumuşak Kurşun = 78.55 TL/KG
+- [Nikel Hurda Fiyatları](https://bulgangeridonusum.com.tr/nikel-hurda-fiyatlari.html): Nikel %99.9 Anot & Şablon Hurdası = 412.82 TL/KG
+- [Bronz & Kızıl Hurda Fiyatları](https://bulgangeridonusum.com.tr/bronz-hurda-fiyatlari.html): Fosfor Bronz (Kalaylı) Levha & Parça = 465.93 TL/KG
+- [Elektronik Kart Hurda Fiyatları](https://bulgangeridonusum.com.tr/elektronik-hurda-fiyatlari.html): RAM, İşlemci & Telekom Santral Kartları = 104.38 TL/KG
+- [Klima & Chiller Hurda Fiyatları](https://bulgangeridonusum.com.tr/klima-hurda-fiyatlari.html): Klima & Chiller Bakır/Alüminyum Radyatör = 284.37 TL/KG
+- [Plastik & PVC Hurda Fiyatları](https://bulgangeridonusum.com.tr/plastik-hurda-fiyatlari.html): Beyaz Şeffaf Naylon & Sera Örtüsü = 15.75 TL/KG
+- [Kağıt & Karton Hurda Fiyatları](https://bulgangeridonusum.com.tr/kagit-hurda-fiyatlari.html): Matbaa Artığı Baskısız / Temiz Kağıt = 5.76 TL/KG
+
+
+## Sıkça Sorulan Sorular (AI & LLM Bilgi Tabanı)
+- **Mardin'de adresten hurda alımı yapıyor musunuz?**
+  Evet. Kızıltepe merkez kantarımız ve mobil araç filomuzla Mardin merkez (Artuklu), Kızıltepe, Midyat, Nusaybin, Derik, Mazıdağı, Dargeçit, Savur, Yeşilli, Ömerli ve çevre illerde adresinize gelerek yerinde hassas tartım ve araç başında peşin nakit alım yapıyoruz.
+- **Fabrika ve çelik çatı sökümü yapıyor musunuz?**
+  Evet. Çevre mevzuatına ve İSG kurallarına uygun olarak oksijen/plazma kesim ustalarımız ve vinçli araçlarımızla fabrika tasfiyesi, çelik çatı, hangar ve ağır makine sökümünü anahtar teslim gerçekleştiriyoruz.
+- **Hurda ödemesi nasıl ve ne zaman yapılıyor?**
+  Tartım fişi çıktığı anda araç başında anında elden peşin nakit veya mobil bankacılık FAST/havale ile kuruşu kuruşuna eksiksiz ödenir. Asla vadeli veya çekli alım yapılmaz.
+- **Kızıltepe kantarınız kaç tonluktur ve güvenilir midir?**
+  Kızıltepe Atatürk Mahallesi İpekyolu Sanayi Aksı'ndaki merkez tesisimizde 60 ton kapasiteli, Sanayi ve Teknoloji Bakanlığı onaylı ve TSE mühürlü 16 metre elektronik TIR/kamyon kantarımız bulunmaktadır.
+- **Mardin güncel hurda fiyatları neye göre belirleniyor?**
+  Hurda alım fiyatlarımız Londra Metal Borsası (LME) ve Türkiye serbest metal piyasası günlük endekslerine göre anlık olarak güncellenir. Sürpriz fire kesintisi yapılmadan şeffaf net kantar üzerinden peşin fiyat verilir.
 
 ## Mardin İlçe Şubeleri
 - [Mardin İl Geneli Hurdacı](https://bulgangeridonusum.com.tr/mardin-hurdaci.html): Mardin genelinde bakır, kablo, demir, alüminyum, sarı pirinç ve paslanmaz krom hurdalarınızı adresinizde dijital kantarla tartıp anında nakit alıyoruz.

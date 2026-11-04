@@ -414,14 +414,15 @@ def build_prices_payload():
                 if item["name"].split("(")[0].strip().lower()[:14] in s_key:
                     raw_market = s_val
                     break
-            discounted_price = round(raw_market * DISCOUNT_FACTOR, 2)
+            if cat["id"] == "demir" and raw_market > 40:
+                raw_market = item["marketPrice"]
+            net_price = round(raw_market * DISCOUNT_FACTOR, 2)
             items_out.append({
                 "code": item["code"],
                 "name": item["name"],
-                "marketPrice": round(raw_market, 2),
-                "price": discounted_price,
+                "price": net_price,
                 "unit": item["unit"],
-                "tonPrice": round(discounted_price * 1000, 2)
+                "tonPrice": round(net_price * 1000, 2)
             })
         categories_out.append({
             "id": cat["id"],
@@ -438,8 +439,6 @@ def build_prices_payload():
     payload = {
         "updatedAt": now_tr.strftime("%d.%m.%Y %H:%M"),
         "dateIso": now_tr.strftime("%Y-%m-%d"),
-        "discountApplied": "-%20 (Borsa Baz Fiyatından %20 Azaltılmış Net Alım Fiyatı)",
-        "discountFactor": DISCOUNT_FACTOR,
         "exchange": {
             "USD_TRY": usd_try,
             "EUR_TRY": eur_try

@@ -267,11 +267,14 @@ export async function onRequestGet(context) {
           break;
         }
       }
+      // Sanity guard: Demir should never exceed 40 TL/KG
+      if (cat.id === "demir" && rawMarket > 40) {
+        rawMarket = item.marketPrice;
+      }
       const discounted = Number((rawMarket * DISCOUNT_FACTOR).toFixed(2));
       return {
         code: item.code,
         name: item.name,
-        marketPrice: Number(rawMarket.toFixed(2)),
         price: discounted,
         unit: item.unit,
         tonPrice: Number((discounted * 1000).toFixed(2))
