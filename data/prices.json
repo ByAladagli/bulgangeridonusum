@@ -1,5 +1,5 @@
 {
-  "updatedAt": "04.11.2026 14:00",
+  "updatedAt": "04.11.2026 15:45",
   "dateIso": "2026-11-04",
   "exchange": {
     "USD_TRY": 50.04,
@@ -27,9 +27,9 @@
         {
           "code": "bakir_antigron",
           "name": "Antigron Kırma Bakır Hurdası",
-          "price": 549.22,
+          "price": 549.58,
           "unit": "KG",
-          "tonPrice": 549220.0
+          "tonPrice": 549580.0
         },
         {
           "code": "bakir_katot",
@@ -48,9 +48,9 @@
         {
           "code": "bakir_filmasin",
           "name": "Bakır Filmaşin (F8) Parlak",
-          "price": 480.54,
+          "price": 480.42,
           "unit": "KG",
-          "tonPrice": 480540.0
+          "tonPrice": 480420.0
         },
         {
           "code": "bakir_talas",
@@ -62,9 +62,9 @@
         {
           "code": "bakir_petek",
           "name": "Bakır Petek (Radyatör) Hurdası",
-          "price": 464.59,
+          "price": 464.58,
           "unit": "KG",
-          "tonPrice": 464590.0
+          "tonPrice": 464580.0
         },
         {
           "code": "bakir_tel",
@@ -170,16 +170,16 @@
         {
           "code": "demir_insaat",
           "name": "İnşaat Demir Çubuğu & Filmaşin",
-          "price": 12.2,
+          "price": 12.21,
           "unit": "KG",
-          "tonPrice": 12200.0
+          "tonPrice": 12210.0
         },
         {
           "code": "demir_santiye",
           "name": "Şantiye Kırpıntı & H-Demir Hurdası",
-          "price": 12.77,
+          "price": 12.74,
           "unit": "KG",
-          "tonPrice": 12770.0
+          "tonPrice": 12740.0
         },
         {
           "code": "demir_imalat",
@@ -231,9 +231,9 @@
         {
           "code": "alu_bakirli_radyator",
           "name": "Bakırlı Alüminyum Klima Radyatörü",
-          "price": 284.06,
+          "price": 284.63,
           "unit": "KG",
-          "tonPrice": 284060.0
+          "tonPrice": 284630.0
         },
         {
           "code": "alu_tel",
@@ -292,16 +292,16 @@
         {
           "code": "sari_arais64",
           "name": "Araiş Sarı Hurdası (MS-64 / MS-70)",
-          "price": 287.1,
+          "price": 286.78,
           "unit": "KG",
-          "tonPrice": 287100.0
+          "tonPrice": 286780.0
         },
         {
           "code": "sari_fermuar",
           "name": "Fermuar Talaşı & Pirinç İmalat Artığı",
-          "price": 251.1,
+          "price": 251.14,
           "unit": "KG",
-          "tonPrice": 251100.0
+          "tonPrice": 251140.0
         },
         {
           "code": "sari_cubuk58",
@@ -313,9 +313,9 @@
         {
           "code": "sari_kirkambar",
           "name": "Sarı Kırkambar (Vana, Musluk, Su Saati)",
-          "price": 230.65,
+          "price": 230.63,
           "unit": "KG",
-          "tonPrice": 230650.0
+          "tonPrice": 230630.0
         },
         {
           "code": "sari_talas58",
@@ -327,9 +327,9 @@
         {
           "code": "sari_radyator",
           "name": "Sarı Oto Radyatör Hurdası",
-          "price": 157.59,
+          "price": 157.22,
           "unit": "KG",
-          "tonPrice": 157590.0
+          "tonPrice": 157220.0
         }
       ]
     },
@@ -360,23 +360,23 @@
         {
           "code": "krom_316_talas",
           "name": "316 Kalite Paslanmaz Krom Talaşı",
-          "price": 89.74,
+          "price": 89.82,
           "unit": "KG",
-          "tonPrice": 89740.0
+          "tonPrice": 89820.0
         },
         {
           "code": "krom_304",
           "name": "304 Kalite Paslanmaz Krom Sac & Boru",
-          "price": 47.13,
+          "price": 47.12,
           "unit": "KG",
-          "tonPrice": 47130.0
+          "tonPrice": 47120.0
         },
         {
           "code": "krom_304_talas",
           "name": "304 Kalite Paslanmaz Krom Talaşı",
-          "price": 47.13,
+          "price": 47.12,
           "unit": "KG",
-          "tonPrice": 47130.0
+          "tonPrice": 47120.0
         },
         {
           "code": "krom_201_430",
@@ -480,9 +480,9 @@
         {
           "code": "kursun_boru",
           "name": "Hurda Kurşun Boru & Kablo Zırhı",
-          "price": 70.06,
+          "price": 70.13,
           "unit": "KG",
-          "tonPrice": 70060.0
+          "tonPrice": 70130.0
         },
         {
           "code": "kursun_cati",
@@ -539,9 +539,9 @@
         {
           "code": "bronz_fosfor",
           "name": "Fosfor Bronz (Kalaylı) Levha & Parça",
-          "price": 466.1,
+          "price": 466.02,
           "unit": "KG",
-          "tonPrice": 466100.0
+          "tonPrice": 466020.0
         },
         {
           "code": "bronz_parca",
@@ -560,9 +560,9 @@
         {
           "code": "bronz_rg5",
           "name": "Kızıl Parça (RG5 / RG7 Vana & Burç)",
-          "price": 264.3,
+          "price": 264.52,
           "unit": "KG",
-          "tonPrice": 264300.0
+          "tonPrice": 264520.0
         }
       ]
     },
@@ -586,9 +586,9 @@
         {
           "code": "elek_server",
           "name": "Server (Sunucu) & Laptop Anakartları",
-          "price": 104.12,
+          "price": 104.29,
           "unit": "KG",
-          "tonPrice": 104120.0
+          "tonPrice": 104290.0
         },
         {
           "code": "elek_hdd",
@@ -652,23 +652,23 @@
         {
           "code": "plastik_naylon",
           "name": "Beyaz Şeffaf Naylon & Sera Örtüsü",
-          "price": 15.76,
+          "price": 15.73,
           "unit": "KG",
-          "tonPrice": 15760.0
+          "tonPrice": 15730.0
         },
         {
           "code": "plastik_moblen",
           "name": "Polipropilen (Moblen) Kasa & Çuval",
-          "price": 13.02,
+          "price": 13.22,
           "unit": "KG",
-          "tonPrice": 13020.0
+          "tonPrice": 13220.0
         },
         {
           "code": "plastik_kristal",
           "name": "Polistiren Kristal & Temiz PET",
-          "price": 11.54,
+          "price": 11.5,
           "unit": "KG",
-          "tonPrice": 11540.0
+          "tonPrice": 11500.0
         },
         {
           "code": "plastik_abs",
