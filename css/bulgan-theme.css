@@ -2194,3 +2194,50 @@ form svg,
   border-color: #25D366 !important;
   color: #25D366 !important;
 }
+
+
+/* Fix mobile sticky bottom overlap */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 74px !important;
+  }
+}
+
+
+.btn-gold {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background: #131d27 !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  padding: 12px 20px !important;
+  border-radius: var(--radius-sm, 8px) !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.btn-gold:hover {
+  background: #1c2b38 !important;
+  border-color: #25D366 !important;
+  color: #25D366 !important;
+}
+
+.btn-gold svg {
+  width: 18px !important;
+  height: 18px !important;
+  color: #25D366 !important;
+  flex-shrink: 0 !important;
+}
+
+.catalog-price-strip {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-top: 14px !important;
+  padding-top: 10px !important;
+  border-top: 1px solid var(--border-light) !important;
+}
