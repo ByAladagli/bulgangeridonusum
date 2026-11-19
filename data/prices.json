@@ -1,9 +1,9 @@
 {
-  "updatedAt": "18.11.2026 16:38",
-  "dateIso": "2026-11-18",
+  "updatedAt": "19.11.2026 17:04",
+  "dateIso": "2026-11-19",
   "exchange": {
-    "USD_TRY": 50.45,
-    "EUR_TRY": 55.49
+    "USD_TRY": 50.48,
+    "EUR_TRY": 55.4
   },
   "source": "LME + Piyasa Canlı Endeksi (%20 Net Kantar İskontolu)",
   "categories": [
@@ -27,9 +27,9 @@
         {
           "code": "bakir_antigron",
           "name": "Antigron Kırma Bakır Hurdası",
-          "price": 548.8,
+          "price": 549.4,
           "unit": "KG",
-          "tonPrice": 548800.0
+          "tonPrice": 549400.0
         },
         {
           "code": "bakir_katot",
@@ -48,9 +48,9 @@
         {
           "code": "bakir_filmasin",
           "name": "Bakır Filmaşin (F8) Parlak",
-          "price": 480.7,
+          "price": 480.3,
           "unit": "KG",
-          "tonPrice": 480700.0
+          "tonPrice": 480300.0
         },
         {
           "code": "bakir_talas",
@@ -170,16 +170,16 @@
         {
           "code": "demir_insaat",
           "name": "İnşaat Demir Çubuğu & Filmaşin",
-          "price": 12.0,
+          "price": 12.42,
           "unit": "KG",
-          "tonPrice": 12000.0
+          "tonPrice": 12420.0
         },
         {
           "code": "demir_santiye",
           "name": "Şantiye Kırpıntı & H-Demir Hurdası",
-          "price": 12.06,
+          "price": 12.65,
           "unit": "KG",
-          "tonPrice": 12060.0
+          "tonPrice": 12650.0
         },
         {
           "code": "demir_imalat",
@@ -231,9 +231,9 @@
         {
           "code": "alu_bakirli_radyator",
           "name": "Bakırlı Alüminyum Klima Radyatörü",
-          "price": 284.46,
+          "price": 284.58,
           "unit": "KG",
-          "tonPrice": 284460.0
+          "tonPrice": 284580.0
         },
         {
           "code": "alu_tel",
@@ -292,16 +292,16 @@
         {
           "code": "sari_arais64",
           "name": "Araiş Sarı Hurdası (MS-64 / MS-70)",
-          "price": 286.59,
+          "price": 286.92,
           "unit": "KG",
-          "tonPrice": 286590.0
+          "tonPrice": 286920.0
         },
         {
           "code": "sari_fermuar",
           "name": "Fermuar Talaşı & Pirinç İmalat Artığı",
-          "price": 250.52,
+          "price": 251.18,
           "unit": "KG",
-          "tonPrice": 250520.0
+          "tonPrice": 251180.0
         },
         {
           "code": "sari_cubuk58",
@@ -313,9 +313,9 @@
         {
           "code": "sari_kirkambar",
           "name": "Sarı Kırkambar (Vana, Musluk, Su Saati)",
-          "price": 230.99,
+          "price": 231.02,
           "unit": "KG",
-          "tonPrice": 230990.0
+          "tonPrice": 231020.0
         },
         {
           "code": "sari_talas58",
@@ -327,9 +327,9 @@
         {
           "code": "sari_radyator",
           "name": "Sarı Oto Radyatör Hurdası",
-          "price": 157.25,
+          "price": 157.07,
           "unit": "KG",
-          "tonPrice": 157250.0
+          "tonPrice": 157070.0
         }
       ]
     },
@@ -360,23 +360,23 @@
         {
           "code": "krom_316_talas",
           "name": "316 Kalite Paslanmaz Krom Talaşı",
-          "price": 90.38,
+          "price": 89.94,
           "unit": "KG",
-          "tonPrice": 90380.0
+          "tonPrice": 89940.0
         },
         {
           "code": "krom_304",
           "name": "304 Kalite Paslanmaz Krom Sac & Boru",
-          "price": 47.07,
+          "price": 46.86,
           "unit": "KG",
-          "tonPrice": 47070.0
+          "tonPrice": 46860.0
         },
         {
           "code": "krom_304_talas",
           "name": "304 Kalite Paslanmaz Krom Talaşı",
-          "price": 47.07,
+          "price": 46.86,
           "unit": "KG",
-          "tonPrice": 47070.0
+          "tonPrice": 46860.0
         },
         {
           "code": "krom_201_430",
@@ -480,9 +480,9 @@
         {
           "code": "kursun_boru",
           "name": "Hurda Kurşun Boru & Kablo Zırhı",
-          "price": 69.7,
+          "price": 69.76,
           "unit": "KG",
-          "tonPrice": 69700.0
+          "tonPrice": 69760.0
         },
         {
           "code": "kursun_cati",
@@ -539,9 +539,9 @@
         {
           "code": "bronz_fosfor",
           "name": "Fosfor Bronz (Kalaylı) Levha & Parça",
-          "price": 466.03,
+          "price": 466.21,
           "unit": "KG",
-          "tonPrice": 466030.0
+          "tonPrice": 466210.0
         },
         {
           "code": "bronz_parca",
@@ -560,9 +560,9 @@
         {
           "code": "bronz_rg5",
           "name": "Kızıl Parça (RG5 / RG7 Vana & Burç)",
-          "price": 264.15,
+          "price": 264.67,
           "unit": "KG",
-          "tonPrice": 264150.0
+          "tonPrice": 264670.0
         }
       ]
     },
@@ -586,9 +586,9 @@
         {
           "code": "elek_server",
           "name": "Server (Sunucu) & Laptop Anakartları",
-          "price": 104.5,
+          "price": 104.36,
           "unit": "KG",
-          "tonPrice": 104500.0
+          "tonPrice": 104360.0
         },
         {
           "code": "elek_hdd",
@@ -652,23 +652,23 @@
         {
           "code": "plastik_naylon",
           "name": "Beyaz Şeffaf Naylon & Sera Örtüsü",
-          "price": 15.54,
+          "price": 15.8,
           "unit": "KG",
-          "tonPrice": 15540.0
+          "tonPrice": 15800.0
         },
         {
           "code": "plastik_moblen",
           "name": "Polipropilen (Moblen) Kasa & Çuval",
-          "price": 13.4,
+          "price": 12.93,
           "unit": "KG",
-          "tonPrice": 13400.0
+          "tonPrice": 12930.0
         },
         {
           "code": "plastik_kristal",
           "name": "Polistiren Kristal & Temiz PET",
-          "price": 11.94,
+          "price": 11.88,
           "unit": "KG",
-          "tonPrice": 11940.0
+          "tonPrice": 11880.0
         },
         {
           "code": "plastik_abs",
