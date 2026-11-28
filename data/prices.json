@@ -1,9 +1,9 @@
 {
-  "updatedAt": "27.11.2026 17:38",
-  "dateIso": "2026-11-27",
+  "updatedAt": "28.11.2026 16:49",
+  "dateIso": "2026-11-28",
   "exchange": {
-    "USD_TRY": 50.74,
-    "EUR_TRY": 55.68
+    "USD_TRY": 50.77,
+    "EUR_TRY": 55.57
   },
   "source": "LME + Piyasa Canlı Endeksi (%20 Net Kantar İskontolu)",
   "categories": [
